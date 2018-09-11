@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
 
@@ -36,7 +37,7 @@ class App extends Component {
           </aside>
 
           <section className="post">
-            <Link to="/postDetails">
+            <Link className="post__link" to="/postDetails">
               <h2 className="post__name">Title of this post is blah</h2>
             </Link>
             <div className="post__votes">
@@ -50,7 +51,7 @@ class App extends Component {
             </div>
           </section>
           <section className="post">
-            <Link to="/postDetails">
+            <Link className="post__link" to="/postDetails">
               <h2 className="post__name">Halb si tsop siht fo eltit</h2>
             </Link>
             <div className="post__votes">
@@ -64,7 +65,7 @@ class App extends Component {
             </div>
           </section>
           <section className="post">
-            <Link to="/postDetails">
+            <Link className="post__link" to="/postDetails">
               <h2 className="post__name">Halb si tsop siht fo eltit</h2>
             </Link>   
             <div className="post__votes">
