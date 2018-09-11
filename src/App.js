@@ -20,8 +20,10 @@ class App extends Component {
               New Post
             </button>
             <div className="order-by">
-              <label>Order By</label>
-              <select>
+              <label className="order-by__label">
+                Order By
+              </label>
+              <select className="order-by__select">
                 <option>Date</option>
                 <option>Votes</option>
               </select>
@@ -34,10 +36,12 @@ class App extends Component {
           </aside>
 
           <section className="post">
-            <h2 className="post__name">Title of this post is blah</h2>
+            <Link to="/postDetails">
+              <h2 className="post__name">Title of this post is blah</h2>
+            </Link>
             <div className="post__votes">
               <i className="fa fa-caret-up" />
-              <p>12</p>
+              <p className="votes">12</p>
               <i className="fa fa-caret-down" />
             </div>
             <div className="post__summary">
@@ -46,10 +50,12 @@ class App extends Component {
             </div>
           </section>
           <section className="post">
-            <h2 className="post__name">Halb si tsop siht fo eltit</h2>
+            <Link to="/postDetails">
+              <h2 className="post__name">Halb si tsop siht fo eltit</h2>
+            </Link>
             <div className="post__votes">
               <i className="fa fa-caret-up" />
-              <p>12</p>
+              <p className="votes">12</p>
               <i className="fa fa-caret-down" />
             </div>
             <div className="post__summary">
@@ -58,10 +64,12 @@ class App extends Component {
             </div>
           </section>
           <section className="post">
-            <h2 className="post__name">Halb si tsop siht fo eltit</h2>
+            <Link to="/postDetails">
+              <h2 className="post__name">Halb si tsop siht fo eltit</h2>
+            </Link>   
             <div className="post__votes">
               <i className="fa fa-caret-up" />
-              <p>12</p>
+              <p className="votes">12</p>
               <i className="fa fa-caret-down" />
             </div>
             <div className="post__summary">
