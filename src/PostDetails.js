@@ -36,6 +36,16 @@ class PostDetails extends React.Component{
 					</aside>
 					<section className="post-details">
 						<h2 className="post-details__name">Title of this post is blah</h2>
+						<section className="post-details__edit">
+							<button className="button button--edit">
+								<i className="fa fa-pencil" />
+								Edit
+							</button>
+							<button className="button button-delete">
+								<i className="fa fa-trash" />
+								Delete
+							</button>
+						</section>
 						<div className="post-details__votes">
 							<i className="fa fa-caret-up" />
 							<p className="votes">12</p>
@@ -53,6 +63,14 @@ class PostDetails extends React.Component{
 						<p className="comment-timestamp">
 							10/09/2018
 						</p>
+						<button className="button button--small button--edit">
+							<i className="fa fa-pencil" />
+							Edit
+						</button>
+						<button className="button button--small button-delete">
+							<i className="fa fa-trash" />
+							Delete
+						</button>
 					</section>
 					<section className="comments">
 						<p className="comment">
@@ -61,6 +79,14 @@ class PostDetails extends React.Component{
 						<p className="comment-timestamp">
 							12/09/2018
 						</p>
+						<button className="button button--small button--edit">
+							<i className="fa fa-pencil" />
+							Edit
+						</button>
+						<button className="button button--small button-delete">
+							<i className="fa fa-trash" />
+							Delete
+						</button>
 					</section>
 				</main>
 			</div>
