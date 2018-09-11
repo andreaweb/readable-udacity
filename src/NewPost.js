@@ -27,7 +27,7 @@ class NewPost extends React.Component{
 
 						<div className="new-post__category">
 							<span className="new-post__category__title">Category:</span>
-							<label for="fic">Fic</label>
+							
 							<input 
 								className="new-post__category__radio"
 								type="radio" 
@@ -35,13 +35,15 @@ class NewPost extends React.Component{
 								name="category" 
 								value="fic" 
 							/>	
-							<label for="non-fic">Non-Fic</label>
+							<label for="fic">Fic</label>
+							
 							<input 
 								className="new-post__category__radio"
 								type="radio" 
 								name="category" 
 								value="non-fic" 
 							/>
+							<label for="non-fic">Non-Fic</label>
 						</div>
 
 						<div className="new-post__buttons">
