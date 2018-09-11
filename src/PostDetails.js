@@ -13,7 +13,7 @@ class PostDetails extends React.Component{
 						</span>
 					</h1>
 				</header>
-				<main>
+				<main className="container container--main">
 					<aside className="aside">
 						<button className="button button--new">
 						New Post

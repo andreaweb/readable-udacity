@@ -15,7 +15,7 @@ class App extends Component {
             </span>
           </h1>
         </header>
-        <main>
+        <main className="container container--main">
           <aside className="aside">
             <button className="button button--new">
               New Post

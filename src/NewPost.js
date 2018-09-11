@@ -13,17 +13,41 @@ class NewPost extends React.Component{
 						</span>
 					</h1>
 				</header>
-				<main>
+				<main className="container">
 					<section className="new-post">
-						<label>Title for your post:</label>
-						<input className="new-post__title" />
-						<label>Details:</label>
-						<textarea className="new-post__details" />
-						<span>Category:</span>
-						<label>Fic</label>
-						<input type="radio" name="category" value="fic" />	
-						<label>Non-Fic</label>
-						<input type="radio" name="category" value="non-fic" />						
+						<div className="new-post__title">
+							<label>Title for your post:</label>
+							<input className="new-post__input" />
+						</div>
+
+						<div className="new-post__details">
+							<label>Details:</label>
+							<textarea className="new-post__textarea" />
+						</div>
+
+						<div className="new-post__category">
+							<span className="new-post__category__title">Category:</span>
+							<label for="fic">Fic</label>
+							<input 
+								className="new-post__category__radio"
+								type="radio" 
+								checked 
+								name="category" 
+								value="fic" 
+							/>	
+							<label for="non-fic">Non-Fic</label>
+							<input 
+								className="new-post__category__radio"
+								type="radio" 
+								name="category" 
+								value="non-fic" 
+							/>
+						</div>
+
+						<div className="new-post__buttons">
+							<button className="button button--cancel">Cancelar</button>
+							<button className="button button--submit">Postar</button>
+						</div>					
 					</section>
 				</main>
 			</div>
