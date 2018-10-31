@@ -20,7 +20,7 @@
 .container{
   background-color: #fff;
   margin: 0 20px;
-  max-height: calc(100vh - 140px);
+  height: calc(100vh - 140px);
   overflow-x: auto;
 }
 .container--main{
@@ -79,6 +79,7 @@
   display: grid;
   grid-auto-columns: 50px auto;
   z-index: 1;
+  border-bottom: 1px solid #f5f2f2;
 }
 .post__link{
   grid-column: 1/4;

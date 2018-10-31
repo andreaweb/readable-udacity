@@ -8,12 +8,26 @@ import '../App.css';
 
 class Home extends Component {
   componentDidMount(){
-     // id - UUID should be fine, but any unique id will work
-     //    timestamp - timestamp in whatever format you like, you can use Date.now() if you like
-     //    title - String
-     //    body - String
-     //    author - String
-     //    category: Any of the categories listed in categories.js. Feel free to extend this list as you desire.
+    fetch(
+        `${process.env.REACT_APP_API_URL}/categories`,
+        {
+            headers: { 
+              'Accept': 'application/json',
+              'Authorization': Math.random().toString(36).substr(-8) 
+            }
+        }
+    ).then(
+      (res) => {
+        console.log(res);
+        return res.json()
+      }
+    ).then(
+      (data) => {
+        console.log(data);
+        return data;
+      }
+    )
+    .catch((error) => console.log(error))
   }
   render() {
     return (
@@ -21,7 +35,6 @@ class Home extends Component {
         <Header />
         <main className="container container--main">
           <Aside page="home"/>
-          <Post />
           <Post />
           <Post />
         </main>
