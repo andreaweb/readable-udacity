@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import Header from '../components/Header';
+import Aside from '../components/Aside';
 import logo from '../logo.svg';
 import '../App.css';
 
@@ -18,28 +19,7 @@ class Home extends Component {
       <div className="App">
         <Header />
         <main className="container container--main">
-          <aside className="aside">
-            <Link to="/new-post">
-              <button className="button button--new">
-              New Post
-              </button>
-            </Link>
-            <div className="order-by">
-              <label className="order-by__label">
-                Order By
-              </label>
-              <select className="order-by__select">
-                <option>Date</option>
-                <option>Votes</option>
-              </select>
-            </div>
-            <ul className="categories">
-              <li className="categories__title">Categories</li>
-              <li>Fic</li>
-              <li>Non-Fic</li>
-            </ul>
-          </aside>
-
+          <Aside page="home"/>
           <section className="post">
             <Link className="post__link" to="/post-details">
               <h2 className="post__name">Title of this post is blah</h2>

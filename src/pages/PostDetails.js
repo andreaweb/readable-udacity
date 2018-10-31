@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import Header from '../components/Header';
+import Aside from '../components/Aside';
 
 class PostDetails extends React.Component{
 	render(){
@@ -8,15 +9,7 @@ class PostDetails extends React.Component{
 			<div className="App">
 				<Header />
 				<main className="container container--main">
-					<aside className="aside">
-						<button className="button button--new">
-						New Post
-						</button>
-						<ul className="categories">
-							<li className="categories__title">Current Category:</li>
-							<li>Fic</li>
-						</ul>
-					</aside>
+					<Aside page="post-details" />
 					<section className="post-details">
 						<h2 className="post-details__name">Title of this post is blah</h2>
 						<section className="post-details__edit">
