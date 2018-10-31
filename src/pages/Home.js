@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-import logo from './logo.svg';
-import './App.css';
+import Header from '../components/Header';
+import logo from '../logo.svg';
+import '../App.css';
 
-class App extends Component {
+class Home extends Component {
   componentDidMount(){
      // id - UUID should be fine, but any unique id will work
      //    timestamp - timestamp in whatever format you like, you can use Date.now() if you like
@@ -15,14 +16,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">
-            Read.It
-            <span className="description">
-              A project for Udacity's React Nanodegree
-            </span>
-          </h1>
-        </header>
+        <Header />
         <main className="container container--main">
           <aside className="aside">
             <button className="button button--new">
@@ -92,4 +86,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Home;

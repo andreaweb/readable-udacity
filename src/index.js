@@ -2,16 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import './index.css';
-import App from './App';
-import PostDetails from './PostDetails';
-import NewPost from './NewPost';
+import Home from './pages/Home';
+import PostDetails from './pages/PostDetails';
+import NewPost from './pages/NewPost';
 import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(
 	<BrowserRouter>
 		<Switch>
-			<Route component={App} path="/" exact />
-			<Route component={NewPost} path="/PostDetails" exact />
+			<Route component={Home} path="/" exact />
+			<Route component={NewPost} path="/new-post" />
+			<Route component={PostDetails} path="/post-details" />
 		</Switch>
 	</BrowserRouter>
 	, document.getElementById('root')
