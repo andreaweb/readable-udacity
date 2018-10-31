@@ -1,18 +1,12 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import Header from '../components/Header';
 
 class NewPost extends React.Component{
 	render(){
 		return(
 			<div className="App">
-				<header className="App-header">
-					<h1 className="App-title">
-						Read.It
-						<span className="description">
-						A project for Udacity's React Nanodegree
-						</span>
-					</h1>
-				</header>
+				<Header />
 				<main className="container">
 					<section className="new-post">
 						<div className="new-post__title">
@@ -47,7 +41,11 @@ class NewPost extends React.Component{
 						</div>
 
 						<div className="new-post__buttons">
-							<button className="button button--cancel">Cancelar</button>
+							<Link to="/">
+								<button className="button button--cancel">
+									Cancelar
+								</button>
+							</Link>
 							<button className="button button--submit">Postar</button>
 						</div>					
 					</section>

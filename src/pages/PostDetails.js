@@ -1,18 +1,12 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import Header from '../components/Header';
 
 class PostDetails extends React.Component{
 	render(){
 		return(
 			<div className="App">
-				<header className="App-header">
-					<h1 className="App-title">
-						Read.It
-						<span className="description">
-						A project for Udacity's React Nanodegree
-						</span>
-					</h1>
-				</header>
+				<Header />
 				<main className="container container--main">
 					<aside className="aside">
 						<button className="button button--new">

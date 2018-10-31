@@ -19,9 +19,11 @@ class Home extends Component {
         <Header />
         <main className="container container--main">
           <aside className="aside">
-            <button className="button button--new">
+            <Link to="/new-post">
+              <button className="button button--new">
               New Post
-            </button>
+              </button>
+            </Link>
             <div className="order-by">
               <label className="order-by__label">
                 Order By
@@ -39,7 +41,7 @@ class Home extends Component {
           </aside>
 
           <section className="post">
-            <Link className="post__link" to="/postDetails">
+            <Link className="post__link" to="/post-details">
               <h2 className="post__name">Title of this post is blah</h2>
             </Link>
             <div className="post__votes">
@@ -53,7 +55,7 @@ class Home extends Component {
             </div>
           </section>
           <section className="post">
-            <Link className="post__link" to="/postDetails">
+            <Link className="post__link" to="/post-details">
               <h2 className="post__name">Halb si tsop siht fo eltit</h2>
             </Link>
             <div className="post__votes">
@@ -67,7 +69,7 @@ class Home extends Component {
             </div>
           </section>
           <section className="post">
-            <Link className="post__link" to="/postDetails">
+            <Link className="post__link" to="/post-details">
               <h2 className="post__name">Halb si tsop siht fo eltit</h2>
             </Link>   
             <div className="post__votes">

@@ -170,3 +170,9 @@
 .new-post__buttons{
   margin: 20px 0 0;
 }
+
+/*utility*/
+.remove-styles-link{
+  text-decoration: none;
+  color: inherit;
+}
