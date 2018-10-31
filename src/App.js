@@ -4,6 +4,14 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  componentDidMount(){
+     // id - UUID should be fine, but any unique id will work
+     //    timestamp - timestamp in whatever format you like, you can use Date.now() if you like
+     //    title - String
+     //    body - String
+     //    author - String
+     //    category: Any of the categories listed in categories.js. Feel free to extend this list as you desire.
+  }
   render() {
     return (
       <div className="App">
