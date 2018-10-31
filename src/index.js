@@ -5,7 +5,10 @@ import './index.css';
 import Home from './pages/Home';
 import PostDetails from './pages/PostDetails';
 import NewPost from './pages/NewPost';
-import registerServiceWorker from './registerServiceWorker';
+import {createStore} from 'redux';
+import reducer from './reducers/reducers'
+
+let store = createStore(reducer)
 
 ReactDOM.render(
 	<BrowserRouter>
@@ -17,4 +20,3 @@ ReactDOM.render(
 	</BrowserRouter>
 	, document.getElementById('root')
 );
-registerServiceWorker();
