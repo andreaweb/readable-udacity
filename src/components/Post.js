@@ -8,7 +8,7 @@ const Post = (props) =>(
       <h2 className="post__name">{props.post.title}</h2>
     </Link>
     <Link className="post__category" to="/post-details">
-      <h4>Category:{props.post.category}</h4>
+      <h4>Category: {props.post.category}</h4>
     </Link>
     <div className="post__votes">
       <i className="fa fa-caret-up" />
@@ -17,7 +17,18 @@ const Post = (props) =>(
     </div>
     <div className="post__summary">
       <p>{props.post.body}</p>
-      <span>{props.post.author}, {props.post.timestamp}</span>
+      <span>
+      <em>By: </em>
+      {props.post.author}, 
+      <em> Posted At: </em>
+      {new Date(props.post.timestamp).toLocaleString("en-US", {
+              "day": "numeric",
+              "hour":"numeric",
+              "minute":"numeric",
+              "month":"short",
+              "year":"numeric"
+      })}
+      </span>
     </div>
   </section>
   : null
