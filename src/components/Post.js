@@ -7,6 +7,9 @@ const Post = (props) =>(
     <Link className="post__link" to="/post-details">
       <h2 className="post__name">{props.post.title}</h2>
     </Link>
+    <Link className="post__category" to="/post-details">
+      <h4>Category:{props.post.category}</h4>
+    </Link>
     <div className="post__votes">
       <i className="fa fa-caret-up" />
       <p className="votes">{props.post.voteScore}</p>
