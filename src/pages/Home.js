@@ -18,7 +18,7 @@ class Home extends Component {
   render() {
     return (
       <div className="App">
-        <Header onClick={this.props} />
+        <Header />
         <main className="container container--main">
           <Aside page="home"/>
           <Post />
@@ -29,19 +29,4 @@ class Home extends Component {
   }
 }
 
-/*first get categories
-function mapStateToProps ({
-        categories: { categories }
-    }) {
-    return {
-        categories: categories
-    }
-}*/
-
-function mapDispatchToProps (dispatch) {
-    return {
-        getAllPosts: () => dispatch(getAllPosts())
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default Home

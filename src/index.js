@@ -5,11 +5,8 @@ import './index.css';
 import Home from './pages/Home';
 import PostDetails from './pages/PostDetails';
 import NewPost from './pages/NewPost';
-import {createStore} from 'redux';
 import { Provider } from 'react-redux';
-import reducer from './reducers/reducers'
-
-let store = createStore(reducer)
+import store from './store/configureStore';
 
 ReactDOM.render(
 	<Provider store={store}>
