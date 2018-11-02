@@ -16,11 +16,11 @@ const Post = (props) =>(
       <i className="fa fa-caret-down" />
     </div>
     <div className="post__summary">
-      <p>{props.post.body}</p>
+      <p className="post__body">{props.post.body}</p>
       <span>
-      <em>By: </em>
+      <em><b>By: </b></em>
       {props.post.author}, 
-      <em> Posted At: </em>
+      <em><b> Posted At: </b></em>
       {new Date(props.post.timestamp).toLocaleString("en-US", {
               "day": "numeric",
               "hour":"numeric",
