@@ -25,7 +25,15 @@ class Home extends Component {
         <Header />
         <main className="container container--main">
           <Aside page="home"/>
-          <Post post={this.props.posts[0]}/>
+          { this.props.posts 
+            ? 
+            this.props.posts.map(
+              (post, key)=>
+              <Post post={post} key={key} />
+            )
+            : null
+          }
+          
         </main>
       </div>
     );

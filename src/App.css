@@ -78,7 +78,7 @@
 .post{
   grid-column: 2/5;
   display: grid;
-  grid-auto-columns: 50px auto;
+  grid-auto-columns: 50px 50% 5% 15%;
   z-index: 1;
   border-bottom: 1px solid #f5f2f2;
 }
