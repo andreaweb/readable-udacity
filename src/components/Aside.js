@@ -1,4 +1,6 @@
 import React from 'react'
+import { getAllPosts } from '../actions/actions.js';
+import { connect } from 'react-redux';
 
 const Aside = props => (
 	<aside className="aside">
@@ -25,7 +27,7 @@ const Aside = props => (
 	            </div>
 	            <ul className="categories">
 	              <li className="categories__title">Categories</li>
-	              <li>Fic</li>
+	              <li>{props.posts[0] ? props.posts[0].voteScore : null}</li>
 	              <li>Non-Fic</li>
 	            </ul>
 	        </section>
@@ -33,5 +35,18 @@ const Aside = props => (
 		
 	</aside>
 )
+function componentDidMount(){
+    // console.log(API.getCategories())
+    // console.log(API.getPostsInCategory('redux'))
+    // console.log(API.getPosts())
+    if(this.props.posts <= 0){
+      this.props.dispatch(getAllPosts())
+    }
+    console.log(this.props)
+  }
+function mapStateToProps(state){
+  const { posts } = state
+  return { posts }
+}
 
-export default Aside
+export default connect(mapStateToProps)(Aside)
