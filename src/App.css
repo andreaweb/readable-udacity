@@ -1,3 +1,7 @@
+fieldset{
+  border: none;
+  display: inline;
+}
 .App {
   background-color: #222;
   height: 100vh
@@ -30,7 +34,6 @@
   grid-auto-rows: 165px;
 }
 .aside{
-  grid-column: 1/5;
   grid-row: 1;
   padding: 10px;
   position: sticky;
@@ -153,8 +156,9 @@
 .new-post{
   padding: 20px;
 }
-.new-post__title{
-  display: flex
+.new-post__text{
+  display: flex;
+  margin: 10px 0;
 }
 .new-post__input{
   border-top: none;

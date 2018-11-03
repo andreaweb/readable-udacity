@@ -2,18 +2,31 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
-import { createNewPost } from '../actions/actions.js';
+import { createNewPost, getAllCategories } from '../actions/actions.js';
 
 class NewPost extends React.Component{
 	state = {
 		title: '',
 		category: '',
-		author: ''
+		author: '',
+		details: ''
 	}
 	componentDidMount(){
-		// this.props.dispatch(
-		// 	createNewPost(this.stringifyPost())
-		// )
+		this.props.dispatch(getAllCategories())
+	}
+	handleChange = (e) =>{
+		this.setState({[e.target.id]: e.target.value})
+	}
+	sendRequest = () =>{
+		if(this.state.title.length > 0 
+			&& this.state.category.length > 0 
+			&& this.state.author.length > 0
+			&& this.state.details.length > 0
+		){
+			this.props.dispatch(
+				createNewPost(this.stringifyPost())
+			)
+		}
 	}
 	stringifyPost(){
 		return JSON.stringify({
@@ -21,7 +34,8 @@ class NewPost extends React.Component{
         id: Math.random().toString(36).substr(-8), 
         timestamp: Date.now(),
         category: this.state.category, 
-        author: this.state.author
+        author: this.state.author,
+        body: this.state.details
       })
 	}
 	render(){
@@ -30,39 +44,59 @@ class NewPost extends React.Component{
 				<Header />
 				<main className="container">
 					<section className="new-post">
-						<div className="new-post__title">
+						<div className="new-post__text">
 							<label>Title for your post:</label>
-							<input className="new-post__input" />
+							<input 
+							className="new-post__input" 
+							id="title"
+							onChange={this.handleChange}
+							/>
 						</div>
 
 						<div className="new-post__details">
 							<label>Details:</label>
-							<textarea className="new-post__textarea" />
+							<textarea 
+							id="details"
+							onChange={this.handleChange}
+							className="new-post__textarea" 
+							/>
+						</div>
+
+						<div className="new-post__text">
+							<label>Your Name or Nickname:</label>
+							<input 
+							id="author"
+							className="new-post__input" 
+							onChange={this.handleChange}
+							/>
 						</div>
 
 						<div className="new-post__category">
 							<span className="new-post__category__title">Category:</span>
-							
-							<input 
-								className="new-post__category__radio"
-								type="radio" 
-								checked 
-								name="category" 
-								value="fic" 
-							/>	
-							<label for="fic">Fic</label>
-							
-							<input 
-								className="new-post__category__radio"
-								type="radio" 
-								name="category" 
-								value="non-fic" 
-							/>
-							<label for="non-fic">Non-Fic</label>
+							{ this.props.categories 
+								? this.props.categories.map(
+									(cat, key) => 
+									<fieldset>
+										<input 
+											className="new-post__category__radio"
+											type="radio" 
+											id="category"
+											key={key}
+											name="category" 
+											value={cat.name}
+											onChange={this.handleChange}
+										/>	
+										<label htmlFor="fic">{cat.name}</label>
+									</fieldset>
+								)
+								: null
+							}
 						</div>
 
 						<div className="new-post__buttons">
-							<button className="button button--submit">Post</button>
+							<button onClick={this.sendRequest} className="button button--submit">
+								Post
+							</button>
 							<button className="button button--cancel">
 								<Link className="remove-styles-link" to="/">
 									Cancel
@@ -77,7 +111,7 @@ class NewPost extends React.Component{
 }
 
 function mapStateToProps(state){
-  return state.posts
+  return state.categories
 }
 
 export default connect(mapStateToProps)(NewPost)
