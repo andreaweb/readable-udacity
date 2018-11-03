@@ -11,16 +11,8 @@ import '../App.css';
 
 class Home extends Component {
   componentDidMount(){
-    // console.log(API.getCategories())
-    // console.log(API.getPostsInCategory('redux'))
-    // console.log(API.getPosts())
-    // if(this.props.posts <= 0){
-    //    console.log('19')
       this.props.dispatch(getAllPosts())
       console.log(this.props)
-     
-    // }
-    // console.log('22')
   }
   render() {
     return (

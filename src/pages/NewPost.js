@@ -1,8 +1,29 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import { connect } from 'react-redux';
 import Header from '../components/Header';
+import { createNewPost } from '../actions/actions.js';
 
 class NewPost extends React.Component{
+	state = {
+		title: '',
+		category: '',
+		author: ''
+	}
+	componentDidMount(){
+		// this.props.dispatch(
+		// 	createNewPost(this.stringifyPost())
+		// )
+	}
+	stringifyPost(){
+		return JSON.stringify({
+        title: this.state.title, 
+        id: Math.random().toString(36).substr(-8), 
+        timestamp: Date.now(),
+        category: this.state.category, 
+        author: this.state.author
+      })
+	}
 	render(){
 		return(
 			<div className="App">
@@ -41,12 +62,12 @@ class NewPost extends React.Component{
 						</div>
 
 						<div className="new-post__buttons">
-							<Link to="/">
-								<button className="button button--cancel">
-									Cancelar
-								</button>
-							</Link>
-							<button className="button button--submit">Postar</button>
+							<button className="button button--submit">Post</button>
+							<button className="button button--cancel">
+								<Link className="remove-styles-link" to="/">
+									Cancel
+								</Link>
+							</button>			
 						</div>					
 					</section>
 				</main>
@@ -54,4 +75,9 @@ class NewPost extends React.Component{
 		)
 	}
 }
-export default NewPost
+
+function mapStateToProps(state){
+  return state.posts
+}
+
+export default connect(mapStateToProps)(NewPost)

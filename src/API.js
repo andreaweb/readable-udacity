@@ -29,13 +29,7 @@ export const createPost = (post) =>
   fetch(`${api}/posts/`, { 
       method: 'POST', 
       headers: headers, 
-      body: JSON.stringify({
-        title: post, 
-        id: Math.random().toString(36).substr(-8), 
-        timestamp: Date.now(),
-        category: 'redux', 
-        author: "Gloryhammer"
-      })
+      body: post
     }
   )
-  .then(res => res.json())
+  .then(res => {console.log(res); return res.json()})

@@ -1,6 +1,7 @@
 import React from 'react'
 import { getAllCategories } from '../actions/actions.js';
 import { connect } from 'react-redux';
+import {Link} from 'react-router-dom';
 
 class Aside extends React.Component{
 	componentDidMount(){
@@ -11,7 +12,9 @@ class Aside extends React.Component{
 		return(
 		<aside className="aside">
 			<button className="button button--new">
-			New Post
+				<Link to="/new-post" className="remove-styles-link">
+					New Post
+				</Link>
 			</button>
 			{
 				this.props.page === 'post-details'
