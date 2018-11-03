@@ -4,9 +4,7 @@ import { connect } from 'react-redux';
 
 class Aside extends React.Component{
 	componentDidMount(){
-		if(!this.props.categories){
-		  this.props.dispatch(getAllCategories())
-		}
+		this.props.dispatch(getAllCategories())
 		console.log(this.props)
 	}
 	render(){
@@ -35,8 +33,13 @@ class Aside extends React.Component{
 		            </div>
 		            <ul className="categories">
 		              <li className="categories__title">Categories</li>
-		              <li>{this.props.categories ? this.props.categories[0].name : null}</li>
-		              <li>Non-Fic</li>
+		              { this.props.categories 
+		              	? this.props.categories.map(
+		              			(cat, key) =>
+		              			<li key={key}>{cat.name}</li>
+		              		)
+		              	: null
+		              }
 		            </ul>
 		        </section>
 			}
@@ -46,8 +49,8 @@ class Aside extends React.Component{
 } 
 
 
-function mapStateToProps(state){
-  return state.categories
+const mapStateToProps = (state) => {
+	return state.categories
 }
 
 export default connect(mapStateToProps)(Aside)
