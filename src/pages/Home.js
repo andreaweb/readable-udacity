@@ -12,7 +12,6 @@ import '../App.css';
 class Home extends Component {
   componentDidMount(){
       this.props.dispatch(getAllPosts())
-      console.log(this.props)
   }
   render() {
     return (
