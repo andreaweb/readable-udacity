@@ -3,11 +3,14 @@ import {Link} from 'react-router-dom';
 import Header from '../components/Header';
 import Aside from '../components/Aside';
 import { connect } from 'react-redux';
-import { getAllPosts } from '../actions/actions.js';
+import { getAllPosts, getCommentsFromPost } from '../actions/actions.js';
 
 class PostDetails extends React.Component{
 	componentDidMount(){
       this.props.dispatch(getAllPosts())
+      //if(this.props.posts.posts){
+      	this.props.dispatch(getCommentsFromPost("8xf0y6ziyjabvozdd253nd"))
+      //}
   	}
 	render(){
 		return(
@@ -48,12 +51,18 @@ class PostDetails extends React.Component{
 	              				</span>
 							</div>
 						</section>
+						{this.props.comments
+							?
 						<section className="comments">
+							{this.props.comments[0].voteScore}
 							<p className="comment">
-								Did you know that 
+								{this.props.comments[0].body}
+							</p>
+							<p className="comment">
+								{this.props.comments[0].author}
 							</p>
 							<p className="comment-timestamp">
-								10/09/2018
+								{this.props.comments[0].timestamp}
 							</p>
 							<button className="button button--small button--edit">
 								<i className="fa fa-pencil" />
@@ -64,33 +73,31 @@ class PostDetails extends React.Component{
 								Delete
 							</button>
 						</section>
-						<section className="comments">
-							<p className="comment">
-								Also the fact 
-							</p>
-							<p className="comment-timestamp">
-								12/09/2018
-							</p>
-							<button className="button button--small button--edit">
-								<i className="fa fa-pencil" />
-								Edit
-							</button>
-							<button className="button button--small button-delete">
-								<i className="fa fa-trash" />
-								Delete
-							</button>
-						</section>
+						: null
+					}
 					</main>
 				
 				: null
 			}
 			</div>
-			)
+		)
 	}
 }
 
+// const mapStateToProps = (state) => {
+//   return 
+//   	state.posts, 
+//   	state.comments
+// }
+
+// const mapStateToProps = state => (
+//     (state.posts), (state.comments)
+// );
+
 function mapStateToProps(state){
-  return state.posts
+	const { posts } = state.posts
+	const { comments } = state.comments
+	return { posts, comments}
 }
 
 export default connect(mapStateToProps)(PostDetails)

@@ -1,5 +1,6 @@
 import {GET_POSTS,
-		GET_CATEGORIES} 
+		GET_CATEGORIES,
+		GET_COMMENTS} 
 		from '../actions/actions.js';
 import {combineReducers} from 'redux';
 
@@ -15,6 +16,21 @@ function posts(state = [], action){
 	}
 }
 
+function comments(state = [], action){
+	switch(action.type){
+		case GET_COMMENTS:
+			// return {
+			// 	...state,
+			// 	comments: action.comments
+			// }
+			return Object.assign({}, state, {
+				comments: action.comments
+			})
+		default:
+			return state
+	}
+}
+
 function categories(state = [], action){
 	switch(action.type){
 		case GET_CATEGORIES:
@@ -22,11 +38,12 @@ function categories(state = [], action){
 				...state, 
 				categories: action.categories
 			}	
+
 		default:
 			return state
 	}
 }
 
-const rootReducer = combineReducers({posts, categories})
+const rootReducer = combineReducers({posts, comments, categories})
 
 export default rootReducer

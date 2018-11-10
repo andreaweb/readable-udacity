@@ -13,12 +13,17 @@ const headers = {
 export const getCategories = () =>
   fetch(`${api}/categories/`, { headers })
     .then(res => res.json())
-    .then(data => {console.log('data'); return data.categories})
+    .then(data => data.categories)
+
+export const getComments = (id) =>
+  fetch(`${api}/posts/${id}/comments`, { headers })
+    .then(res => res.json())
+    .then(comments => comments)
 
 export const getPosts = () =>
   fetch(`${api}/posts`, { headers })
     .then(res => res.json())
-    .then(data => data)
+    .then(posts => posts)
 
 export const getPostsInCategory = (category) =>
   fetch(`${api}/${category}/posts`, { headers })

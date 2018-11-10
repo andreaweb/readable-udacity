@@ -6,7 +6,6 @@ import {Link} from 'react-router-dom';
 class Aside extends React.Component{
 	componentDidMount(){
 		this.props.dispatch(getAllCategories())
-		console.log(this.props)
 	}
 	render(){
 		return(
