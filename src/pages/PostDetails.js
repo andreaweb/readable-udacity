@@ -62,7 +62,13 @@ class PostDetails extends React.Component{
 								{this.props.comments[0].author}
 							</p>
 							<p className="comment-timestamp">
-								{this.props.comments[0].timestamp}
+								{new Date(this.props.comments[0].timestamp).toLocaleString("en-US", {
+						              "day": "numeric",
+						              "hour":"numeric",
+						              "minute":"numeric",
+						              "month":"short",
+						              "year":"numeric"
+						      	})}	
 							</p>
 							<button className="button button--small button--edit">
 								<i className="fa fa-pencil" />
