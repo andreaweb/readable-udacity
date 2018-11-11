@@ -39,45 +39,61 @@ class PostDetails extends React.Component{
 							</div>
 							<div className="post-details__post">
 								<p>{this.props.posts[0].body}</p>
-	              				<span>
-	              				{this.props.posts[0].author}, 
-	              				{new Date(this.props.posts[0].timestamp).toLocaleString("en-US", {
-						              "day": "numeric",
-						              "hour":"numeric",
-						              "minute":"numeric",
-						              "month":"short",
-						              "year":"numeric"
-						      	})}
-	              				</span>
+								<span>
+								  <em><b>By: </b></em>
+							      {this.props.posts[0].author},  
+							      <em><b> Posted At: </b></em>
+		              				{new Date(this.props.posts[0].timestamp).toLocaleString("en-US", {
+							              "day": "numeric",
+							              "hour":"numeric",
+							              "minute":"numeric",
+							              "month":"short",
+							              "year":"numeric"
+							      	})}
+		              			</span>
 							</div>
 						</section>
 						{this.props.comments
 							?
 						<section className="comments">
-							{this.props.comments[0].voteScore}
 							<p className="comment">
 								{this.props.comments[0].body}
 							</p>
-							<p className="comment">
-								{this.props.comments[0].author}
-							</p>
-							<p className="comment-timestamp">
-								{new Date(this.props.comments[0].timestamp).toLocaleString("en-US", {
-						              "day": "numeric",
-						              "hour":"numeric",
-						              "minute":"numeric",
-						              "month":"short",
-						              "year":"numeric"
-						      	})}	
-							</p>
-							<button className="button button--small button--edit">
-								<i className="fa fa-pencil" />
-								Edit
-							</button>
-							<button className="button button--small button-delete">
-								<i className="fa fa-trash" />
-								Delete
-							</button>
+							<div>
+								<p className="comment-details">
+									<em><b>By: </b></em>
+									<span className="comment-detail">
+							       		{this.props.comments[0].author}, 
+							       	</span> 
+								    <span className="comment-detail">
+								    	<em><b> Posted At: </b></em>
+								    </span>
+								    <span className="comment-detail">
+			              				{new Date(this.props.comments[0].timestamp).toLocaleString("en-US", {
+							              "day": "numeric",
+							              "hour":"numeric",
+							              "minute":"numeric",
+							              "month":"short",
+							              "year":"numeric"
+							      		})}
+						      		</span>
+		              			</p>
+							</div>
+							<section className="comment-buttons">
+								<button className="button button--small button--edit">
+									<i className="fa fa-pencil" />
+									Edit
+								</button>
+								<button className="button button--small button-delete">
+									<i className="fa fa-trash" />
+									Delete
+								</button>
+								<span className="comment-votes">
+						      		<i className="fa fa-caret-up" />
+						      	  	 {this.props.comments[0].voteScore}
+						      	  	<i className="fa fa-caret-down" />
+					      	  	</span>
+				      	  	</section>
 						</section>
 						: null
 					}

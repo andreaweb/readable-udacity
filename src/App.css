@@ -152,7 +152,25 @@ fieldset{
   grid-column: 2/5;
   grid-row: auto;
 }
-
+.comment-buttons{
+  display: flex;
+}
+.comment-details{
+  display: flex;
+}
+.comment-detail{
+  margin-left: 3px
+}
+.comment-votes{
+  margin-left:20px;
+  margin-top:5px;
+  width: 50px;
+  display: flex;
+  justify-content: space-between;
+}
+.comment-votes .fa{
+  cursor: pointer
+}
 .new-post{
   padding: 20px;
 }
