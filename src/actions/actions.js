@@ -1,5 +1,11 @@
-import 
-	{ getCategories, getComments, getPosts, getSpecificPost, createPost } 
+import { 
+	getCategories, 
+	getComments, 
+	getPosts, 
+	getSpecificPost, 
+	createPost,
+	changePost
+} 
 from '../API.js';
 
 export const ADD_POST = 'ADD_POST';
@@ -19,6 +25,9 @@ function receivePosts(posts){
 }
 function receivePost(post){
 	return { type: GET_POST, post}
+}
+function receiveEditedPost(post){
+	return { type: EDIT_POST, post}
 }
 function receiveCategories(categories){
 	return { type: GET_CATEGORIES, categories}
@@ -75,6 +84,19 @@ export function getPost(postID){
 				post => { 
 					dispatch(
 						receivePost(post)
+					)
+				}
+			)
+	}	
+}
+
+export function editPost(postID, postTitle, postBody){
+	return dispatch => {
+		return changePost(postID, postTitle, postBody)
+			.then(
+				post => { 
+					dispatch(
+						receiveEditedPost(post)
 					)
 				}
 			)

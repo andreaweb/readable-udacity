@@ -27,7 +27,12 @@ class PostDetails extends React.Component{
 							<section className="post-details__edit">
 								<button className="button button--edit">
 									<i className="fa fa-pencil" />
-									Edit
+									<Link 
+										to={`/edit-post/${this.props.post.id}`} 
+										className="remove-styles-link"
+									>
+										Edit
+									</Link>
 								</button>
 								<button className="button button-delete">
 									<i className="fa fa-trash" />

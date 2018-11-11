@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
-import { createNewPost, getAllCategories } from '../actions/actions.js';
+import { getPost, createNewPost, getAllCategories } from '../actions/actions.js';
 
 class NewPost extends React.Component{
 	state = {
@@ -12,7 +12,23 @@ class NewPost extends React.Component{
 		details: ''
 	}
 	componentDidMount(){
+		this.id = this.props.location.pathname.replace('/edit-post/', '')
+		if(this.id){
+				this.props.dispatch(
+					getPost(this.id)
+				).then(() => {
+					this.setCurrentValues()
+				})
+		}
 		this.props.dispatch(getAllCategories())
+	}
+	setCurrentValues = () => {
+		this.setState({
+			title: this.props.post.title,
+			category: this.props.post.category,
+			author: this.props.post.author,
+			details: this.props.post.body
+		})
 	}
 	handleChange = (e) =>{
 		this.setState({[e.target.id]: e.target.value})
@@ -23,9 +39,18 @@ class NewPost extends React.Component{
 			&& this.state.author.length > 0
 			&& this.state.details.length > 0
 		){
-			this.props.dispatch(
-				createNewPost(this.stringifyPost())
-			)
+			if(
+				this.props.dispatch(
+					createNewPost(this.stringifyPost())
+				)
+			){
+				alert("Post created! Yay!")
+			}else{
+				alert("Oops, something went wrong :(")
+			}
+		//display something about the operation being successful or not
+		}else{
+			alert('You have not filled all necessary information!')
 		}
 	}
 	stringifyPost(){
@@ -49,6 +74,7 @@ class NewPost extends React.Component{
 							<input 
 							className="new-post__input" 
 							id="title"
+							value={this.state.title}
 							onChange={this.handleChange}
 							/>
 						</div>
@@ -57,6 +83,7 @@ class NewPost extends React.Component{
 							<label>Details:</label>
 							<textarea 
 							id="details"
+							value={this.state.details}
 							onChange={this.handleChange}
 							className="new-post__textarea" 
 							/>
@@ -66,6 +93,7 @@ class NewPost extends React.Component{
 							<label>Your Name or Nickname:</label>
 							<input 
 							id="author"
+							value={this.state.author}
 							className="new-post__input" 
 							onChange={this.handleChange}
 							/>
@@ -111,7 +139,9 @@ class NewPost extends React.Component{
 }
 
 function mapStateToProps(state){
-  return state.categories
+	const { categories } = state.categories
+	const { post } = state.post
+	return { categories, post }
 }
 
 export default connect(mapStateToProps)(NewPost)

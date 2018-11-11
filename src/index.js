@@ -13,7 +13,7 @@ ReactDOM.render(
 		<BrowserRouter>
 			<Switch>
 				<Route component={Home} path="/" exact />
-				<Route component={NewPost} path="/new-post" />
+				<Route component={NewPost} path="/(new-post|edit-post)/" />
 				<Route component={PostDetails} path="/post-details" />
 			</Switch>
 		</BrowserRouter>

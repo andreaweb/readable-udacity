@@ -32,6 +32,7 @@ fieldset{
   display: grid;
   grid-template-rows: 165px;
   grid-auto-rows: 165px;
+  grid-auto-columns: 15% 20% 45%;
 }
 .aside{
   grid-row: 1;
@@ -184,6 +185,10 @@ fieldset{
 }
 .comment-votes .fa{
   cursor: pointer
+}
+.comment-votes .fa:hover,
+.comment-votes .fa:active{
+  color: #ccc;
 }
 .new-post{
   padding: 20px;
