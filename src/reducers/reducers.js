@@ -1,4 +1,5 @@
 import {GET_POSTS,
+		GET_POST,
 		GET_CATEGORIES,
 		GET_COMMENTS} 
 		from '../actions/actions.js';
@@ -16,16 +17,25 @@ function posts(state = [], action){
 	}
 }
 
+function post(state = [], action){
+	switch(action.type){
+		case GET_POST:
+			return {
+				...state, 
+				post: action.post
+			}		
+		default:
+			return state
+	}
+}
+
 function comments(state = [], action){
 	switch(action.type){
 		case GET_COMMENTS:
-			// return {
-			// 	...state,
-			// 	comments: action.comments
-			// }
-			return Object.assign({}, state, {
+			return {
+				...state,
 				comments: action.comments
-			})
+			}
 		default:
 			return state
 	}
@@ -44,6 +54,6 @@ function categories(state = [], action){
 	}
 }
 
-const rootReducer = combineReducers({posts, comments, categories})
+const rootReducer = combineReducers({posts, post, comments, categories})
 
 export default rootReducer

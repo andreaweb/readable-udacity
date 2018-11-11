@@ -1,4 +1,7 @@
-import { getCategories, getComments, getPosts, createPost } from '../API.js';
+import 
+	{ getCategories, getComments, getPosts, getSpecificPost, createPost } 
+from '../API.js';
+
 export const ADD_POST = 'ADD_POST';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const DELETE_POST = 'DELETE_POST';
@@ -9,9 +12,13 @@ export const GET_CATEGORIES = 'GET_CATEGORIES';
 export const GET_COMMENTS = 'GET_COMMENTS';
 export const GET_NEW_POST = 'GET_NEW_POST';
 export const GET_POSTS = 'GET_POSTS';
+export const GET_POST = 'GET_POST';
 
 function receivePosts(posts){
 	return { type: GET_POSTS, posts}
+}
+function receivePost(post){
+	return { type: GET_POST, post}
 }
 function receiveCategories(categories){
 	return { type: GET_CATEGORIES, categories}
@@ -58,11 +65,20 @@ export function getAllPosts(){
 					)
 				}
 			)
-			// .catch(
-			// 	error => console.log("Error: ", error)
-			// )
-	}
-	
+	}	
+}
+
+export function getPost(postID){
+	return dispatch => {
+		return getSpecificPost(postID)
+			.then(
+				post => { 
+					dispatch(
+						receivePost(post)
+					)
+				}
+			)
+	}	
 }
 
 export function getAllCategories(){
@@ -75,9 +91,6 @@ export function getAllCategories(){
 					)
 				}
 			)
-			// .catch(
-			// 	error => console.log("Error: ", error)
-			// )
 	}
 	
 }

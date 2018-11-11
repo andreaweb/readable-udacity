@@ -1,11 +1,12 @@
 import React from 'react'
-import { getAllCategories } from '../actions/actions.js';
+import { getAllCategories, getPost } from '../actions/actions.js';
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
 
 class Aside extends React.Component{
 	componentDidMount(){
 		this.props.dispatch(getAllCategories())
+		this.props.dispatch(getPost("8xf0y6ziyjabvozdd253nd"))
 	}
 	render(){
 		return(
@@ -20,7 +21,7 @@ class Aside extends React.Component{
 				?
 				<ul className="categories">
 					<li className="categories__title">Current Category:</li>
-					<li></li>
+					<li>{this.props.post ? this.props.post.category : ''}</li>
 				</ul>
 				:
 				<section>
@@ -50,9 +51,10 @@ class Aside extends React.Component{
 	}
 } 
 
-
-const mapStateToProps = (state) => {
-	return state.categories
+function mapStateToProps(state){
+	const { post } = state.post
+	const { categories } = state.categories
+	return { post, categories}
 }
 
 export default connect(mapStateToProps)(Aside)
