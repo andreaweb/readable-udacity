@@ -3,23 +3,27 @@ import {Link} from 'react-router-dom';
 import Header from '../components/Header';
 import Aside from '../components/Aside';
 import { connect } from 'react-redux';
-import { getAllPosts, getCommentsFromPost } from '../actions/actions.js';
+import { getPost, getCommentsFromPost } from '../actions/actions.js';
 
 class PostDetails extends React.Component{
 	componentDidMount(){
-      this.props.dispatch(getAllPosts())
-      this.props.dispatch(getCommentsFromPost("8xf0y6ziyjabvozdd253nd"))
+		this.id = this.props.location.pathname.replace('/post-details/', '')
+		console.log(this.id)
+		this.props.dispatch(getPost(this.id))
+		this.props.dispatch(getCommentsFromPost(this.id))
   	}
 	render(){
 		return(
 			<div className="App">
 			<Header />
-			{this.props.posts
+			{this.props.post
 				?
 					<main className="container container--main">
 						<Aside page="post-details" />
 						<section className="post-details">
-							<h2 className="post-details__name">{this.props.posts[0].title}</h2>
+							<h2 className="post-details__name">
+								{this.props.post.title}
+							</h2>
 							<section className="post-details__edit">
 								<button className="button button--edit">
 									<i className="fa fa-pencil" />
@@ -32,18 +36,20 @@ class PostDetails extends React.Component{
 							</section>
 							<div className="post-details__votes">
 								<i className="fa fa-caret-up" />
-								<p className="votes">{this.props.posts[0].voteScore}</p>
+								<p className="votes">
+									{this.props.post.voteScore}
+								</p>
 								<i className="fa fa-caret-down" />
 							</div>
 							<div className="post-details__post">
 								<p className="post-details__body">
-									{this.props.posts[0].body}
+									{this.props.post.body}
 								</p>
 								<span>
 								  <em><b>By: </b></em>
-							      {this.props.posts[0].author},  
+							      {this.props.post.author},  
 							      <em><b> Posted At: </b></em>
-		              				{new Date(this.props.posts[0].timestamp).toLocaleString("en-US", {
+		              				{new Date(this.props.post.timestamp).toLocaleString("en-US", {
 							              "day": "numeric",
 							              "hour":"numeric",
 							              "minute":"numeric",
@@ -109,9 +115,9 @@ class PostDetails extends React.Component{
 }
 
 function mapStateToProps(state){
-	const { posts } = state.posts
+	const { post } = state.post
 	const { comments } = state.comments
-	return { posts, comments}
+	return { post, comments}
 }
 
 export default connect(mapStateToProps)(PostDetails)

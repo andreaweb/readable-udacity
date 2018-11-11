@@ -26,8 +26,7 @@ class Home extends Component {
               <Post post={post} key={key} />
             )
             : null
-          }
-          
+          }  
         </main>
       </div>
     );

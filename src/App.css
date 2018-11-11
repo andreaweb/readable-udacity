@@ -71,6 +71,11 @@ fieldset{
 .button:first-child{
   margin-right: 20px;
 }
+.button:hover,
+.button:focus{
+  color: buttonface;
+  background-color: buttontext
+}
 .button--delete{
 
 }
@@ -113,6 +118,10 @@ fieldset{
 .post__votes .fa{
   cursor: pointer
 }
+.post__votes .fa:hover,
+.post__votes .fa:active{
+  color: #ccc;
+}
 .votes{
   margin: 10px 0;
 }
@@ -144,6 +153,10 @@ fieldset{
 }
 .post-details__votes .fa{
   cursor: pointer
+}
+.post-details__votes .fa:hover,
+.post-details__votes .fa:active{
+  color: #ccc;
 }
 .post-details__body{
   margin: 0 0 20px 0;
