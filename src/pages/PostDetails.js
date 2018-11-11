@@ -8,9 +8,7 @@ import { getAllPosts, getCommentsFromPost } from '../actions/actions.js';
 class PostDetails extends React.Component{
 	componentDidMount(){
       this.props.dispatch(getAllPosts())
-      //if(this.props.posts.posts){
-      	this.props.dispatch(getCommentsFromPost("8xf0y6ziyjabvozdd253nd"))
-      //}
+      this.props.dispatch(getCommentsFromPost("8xf0y6ziyjabvozdd253nd"))
   	}
 	render(){
 		return(
@@ -56,22 +54,24 @@ class PostDetails extends React.Component{
 							</div>
 						</section>
 						{this.props.comments
-							?
+						?
+						this.props.comments.map(
+							(comment, key) =>
 						<section className="comments">
 							<p className="comment">
-								{this.props.comments[0].body}
+								{comment.body}
 							</p>
 							<div>
 								<p className="comment-details">
 									<em><b>By: </b></em>
 									<span className="comment-detail">
-							       		{this.props.comments[0].author}, 
+							       		{comment.author}, 
 							       	</span> 
 								    <span className="comment-detail">
 								    	<em><b> Posted At: </b></em>
 								    </span>
 								    <span className="comment-detail">
-			              				{new Date(this.props.comments[0].timestamp).toLocaleString("en-US", {
+			              				{new Date(comment.timestamp).toLocaleString("en-US", {
 							              "day": "numeric",
 							              "hour":"numeric",
 							              "minute":"numeric",
@@ -92,31 +92,21 @@ class PostDetails extends React.Component{
 								</button>
 								<span className="comment-votes">
 						      		<i className="fa fa-caret-up" />
-						      	  	 {this.props.comments[0].voteScore}
+						      	  	 {comment.voteScore}
 						      	  	<i className="fa fa-caret-down" />
 					      	  	</span>
 				      	  	</section>
 						</section>
+						)
 						: null
 					}
 					</main>
-				
 				: null
 			}
 			</div>
 		)
 	}
 }
-
-// const mapStateToProps = (state) => {
-//   return 
-//   	state.posts, 
-//   	state.comments
-// }
-
-// const mapStateToProps = state => (
-//     (state.posts), (state.comments)
-// );
 
 function mapStateToProps(state){
 	const { posts } = state.posts
