@@ -35,7 +35,7 @@ fieldset{
 }
 .aside{
   grid-row: 1;
-  padding: 10px;
+  padding: 15px 10px;
   position: sticky;
   top: 0;
   z-index: 0;
@@ -125,15 +125,15 @@ fieldset{
   display: grid;
   z-index: 1;
   grid-auto-columns: 50px auto;
+  border-bottom: 1px solid #f5f2f2;
 }
 .post-details__name{
   grid-column: 1/4;
   grid-row: 1;
-  margin-bottom: -10px;
 }
 .post-details__edit{
   grid-column: 4/4;
-  margin-top: 10px;
+  margin-top: 15px;
 }
 .post-details__votes{
   grid-row: 2;
@@ -145,10 +145,11 @@ fieldset{
 .post-details__votes .fa{
   cursor: pointer
 }
-.post-details__post{
-
+.post-details__body{
+  margin: 0 0 20px 0;
 }
 .comments{
+  margin-top: 30px;
   grid-column: 2/5;
   grid-row: auto;
 }

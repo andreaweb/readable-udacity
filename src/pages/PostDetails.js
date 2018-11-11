@@ -38,7 +38,9 @@ class PostDetails extends React.Component{
 								<i className="fa fa-caret-down" />
 							</div>
 							<div className="post-details__post">
-								<p>{this.props.posts[0].body}</p>
+								<p className="post-details__body">
+									{this.props.posts[0].body}
+								</p>
 								<span>
 								  <em><b>By: </b></em>
 							      {this.props.posts[0].author},  

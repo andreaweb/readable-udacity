@@ -20,7 +20,7 @@ class Aside extends React.Component{
 				?
 				<ul className="categories">
 					<li className="categories__title">Current Category:</li>
-					<li>Fic</li>
+					<li></li>
 				</ul>
 				:
 				<section>
