@@ -6,7 +6,8 @@ import {
 	createPost,
 	createComment,
 	changePost,
-	deletePostById
+	deletePostById,
+	deleteCommentById
 } 
 from '../API.js';
 
@@ -28,7 +29,7 @@ function receivePosts(posts){
 function receivePost(post){
 	return { type: GET_POST, post}
 }
-function confirmPostDeletion(response){
+function confirmDeletion(response){
 	return { type: DELETE_POST, response}
 }
 function receiveResponse(response){
@@ -113,7 +114,20 @@ export function deletePost(postID){
 			.then(
 				(response) => {
 					dispatch(
-						confirmPostDeletion(response)
+						confirmDeletion(response)
+					)
+				}
+			)
+	}
+}
+
+export function deleteCommentByID(commentID){
+	return dispatch => {
+		return deleteCommentById(commentID)
+			.then(
+				(response) => {
+					dispatch(
+						confirmDeletion(response)
 					)
 				}
 			)

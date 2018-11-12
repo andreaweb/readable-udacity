@@ -5,13 +5,14 @@ import Aside from '../components/Aside';
 import { connect } from 'react-redux';
 import { addNewComment,
 		deletePost, 
+		deleteCommentByID,
 		getPost, 
 		getCommentsFromPost } 
 from '../actions/actions.js';
 
 class PostDetails extends React.Component{
 	state = {
-		isModalOpen: true,
+		isModalOpen: false,
 		body: '',
 		author: ''
 	}
@@ -34,11 +35,15 @@ class PostDetails extends React.Component{
 	        author: this.state.author,
 	        parentId: this.id 
 	    }
+	    console.log(this.id, comment.parentId)
   		if(this.props.dispatch(addNewComment(comment))){
   			alert("new comment added")
   		}else{
   			alert('your new comment didnt work')
   		}
+  	}
+  	deleteComment = (commentID) => {
+  		this.props.dispatch(deleteCommentByID(commentID))
   	}
   	handleChange = (e) => {
   		this.setState({[e.target.id]: e.target.value})
@@ -161,11 +166,17 @@ class PostDetails extends React.Component{
 			              			</p>
 								</div>
 								<section className="comment-buttons">
-									<button className="button button--small button--edit">
+									<button 
+										className="button button--small button--edit"
+										onClick={this.openModal}
+									>
 										<i className="fa fa-pencil" />
 										Edit
 									</button>
-									<button className="button button--small button-delete">
+									<button 
+										className="button button--small button-delete"
+										onClick={() => this.deleteComment(comment.id)}
+									>
 										<i className="fa fa-trash" />
 										Delete
 									</button>
