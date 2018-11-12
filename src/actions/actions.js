@@ -12,7 +12,7 @@ export const ADD_POST = 'ADD_POST';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const DELETE_POST = 'DELETE_POST';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
-export const EDIT_POST = 'EDIT_POST';
+export const GET_RESPONSE = 'GET_RESPONSE';
 export const EDIT_COMMENT = 'EDIT_COMMENT';
 export const GET_CATEGORIES = 'GET_CATEGORIES';
 export const GET_COMMENTS = 'GET_COMMENTS';
@@ -26,8 +26,8 @@ function receivePosts(posts){
 function receivePost(post){
 	return { type: GET_POST, post}
 }
-function receiveEditedPost(post){
-	return { type: EDIT_POST, post}
+function receiveResponse(response){
+	return { type: GET_RESPONSE, response}
 }
 function receiveCategories(categories){
 	return { type: GET_CATEGORIES, categories}
@@ -91,12 +91,14 @@ export function getPost(postID){
 }
 
 export function editPost(postID, postTitle, postBody){
+	console.log('action says' + postID, postTitle, postBody)
 	return dispatch => {
 		return changePost(postID, postTitle, postBody)
 			.then(
-				post => { 
+				(post, response) => { 
 					dispatch(
-						receiveEditedPost(post)
+						receivePost(post)
+//						,receiveResponse(response)
 					)
 				}
 			)

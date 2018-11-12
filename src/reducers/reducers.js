@@ -1,5 +1,7 @@
-import {GET_POSTS,
+import {
+		GET_POSTS,
 		GET_POST,
+		GET_RESPONSE,
 		GET_CATEGORIES,
 		GET_COMMENTS} 
 		from '../actions/actions.js';
@@ -23,7 +25,19 @@ function post(state = [], action){
 			return {
 				...state, 
 				post: action.post
-			}		
+			}	
+		default:
+			return state
+	}
+}
+
+function response(state = [], action){
+	switch(action.type){
+		case GET_RESPONSE:
+			return {
+				...state,
+				response: action.response
+			}
 		default:
 			return state
 	}
@@ -54,6 +68,6 @@ function categories(state = [], action){
 	}
 }
 
-const rootReducer = combineReducers({posts, post, comments, categories})
+const rootReducer = combineReducers({posts, post, response, comments, categories})
 
 export default rootReducer

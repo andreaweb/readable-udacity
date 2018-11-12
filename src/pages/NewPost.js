@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
-import { getPost, createNewPost, getAllCategories } from '../actions/actions.js';
+import { getPost, editPost, createNewPost, getAllCategories } from '../actions/actions.js';
 
 class NewPost extends React.Component{
 	state = {
@@ -12,7 +12,7 @@ class NewPost extends React.Component{
 		details: ''
 	}
 	componentDidMount(){
-		this.id = this.props.location.pathname.replace(/[a-z-/]+/, '')
+		this.id = this.props.location.pathname.replace(/[/][a-z-]+[/]/, '')
 		if(this.id){
 			this.props.dispatch(
 				getPost(this.id)
@@ -33,22 +33,38 @@ class NewPost extends React.Component{
 	handleChange = (e) =>{
 		this.setState({[e.target.id]: e.target.value})
 	}
-	sendRequest = () =>{
+	sendRequest = () => {
 		if(this.state.title.length > 0 
 			&& this.state.category.length > 0 
 			&& this.state.author.length > 0
 			&& this.state.details.length > 0
 		){
-			if(
-				this.props.dispatch(
-					createNewPost(this.stringifyPost())
-				)
-			){
-				alert("Post created! Yay!")
+			if(this.id){			    
+				if(
+					this.props.dispatch(
+						editPost(
+							this.id,
+					        this.state.title, 
+					        this.state.details
+						)
+					)
+				){
+					alert("Post successfully edited! Woohoo!")
+				}else{
+					alert("Your post has not been changed :( Try again later")
+				}
 			}else{
-				alert("Oops, something went wrong :(")
+				if(
+					this.props.dispatch(
+						createNewPost(this.stringifyPost())
+					)
+				){
+					alert("Post created! Yay!")
+				}else{
+					alert("Oops, something went wrong :(")
+				}
 			}
-		//display something about the operation being successful or not
+		//replace alerts by something more visually aesthetic 
 		}else{
 			alert('You have not filled all necessary information!')
 		}
@@ -141,7 +157,8 @@ class NewPost extends React.Component{
 function mapStateToProps(state){
 	const { categories } = state.categories
 	const { post } = state.post
-	return { categories, post }
+	const { response } = state.response
+	return { categories, post, response }
 }
 
 export default connect(mapStateToProps)(NewPost)

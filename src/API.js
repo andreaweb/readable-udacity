@@ -28,25 +28,25 @@ export const getPosts = () =>
 export const getSpecificPost = (id) =>
   fetch(`${api}/posts/${id}`, { headers })
     .then(res => res.json())
-    .then(post => {console.log(post); return post})
+    .then(post => post)
 
 export const getPostsInCategory = (category) =>
   fetch(`${api}/${category}/posts`, { headers })
     .then(res => res.json())
     .then(data => data)
 
-export const changePost = (id, title, post) =>
-  fetch(`${api}/posts/${id}`, { 
-      headers: headers, 
+export const changePost = (id, title, body) =>
+  fetch(`${api}/posts/${id}`, {
       method: 'PUT',
-      title: title,
-      body: post
+      headers: headers,
+      body: JSON.stringify({body, title: title})
     }
   )
-  .then(res => res.json())
-  .then(post => {console.log(post); return post})
-
-  //PUT /comments/:id
+  .then(res => {
+    res.json();
+    console.log(res.ok);
+    return res.ok
+  })
 
 export const createPost = (post) =>
   fetch(`${api}/posts/`, { 
