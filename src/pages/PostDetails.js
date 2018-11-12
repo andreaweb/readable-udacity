@@ -11,7 +11,9 @@ from '../actions/actions.js';
 
 class PostDetails extends React.Component{
 	state = {
-		isModalOpen: true
+		isModalOpen: true,
+		body: '',
+		author: ''
 	}
 	componentDidMount(){
 		this.id = this.props.location.pathname.replace(/[/][a-z-]+[/]/, '')
@@ -26,10 +28,10 @@ class PostDetails extends React.Component{
   	}
   	addComment = () => {
   		let comment = {
-	  		body: 'Listening to a Power Metal Collection',
+	  		body: this.state.body,
 	        id: Math.random().toString(36).substr(-8),
 	        timestamp: Date.now(),
-	        author: 'vol106',
+	        author: this.state.author,
 	        parentId: this.id 
 	    }
   		if(this.props.dispatch(addNewComment(comment))){
@@ -37,6 +39,9 @@ class PostDetails extends React.Component{
   		}else{
   			alert('your new comment didnt work')
   		}
+  	}
+  	handleChange = (e) => {
+  		this.setState({[e.target.id]: e.target.value})
   	}
   	openModal = () => {
   		this.setState({isModalOpen: true})
@@ -61,11 +66,14 @@ class PostDetails extends React.Component{
 						<div className="new-post__details">
 							<label>Details:</label>
 							<textarea 
-							id="details"
+							id="body"
 							onChange={this.handleChange}
 							className="new-post__textarea" 
 							/>
 						</div>
+						<button className="button" onClick={this.addComment}>
+							Comment
+						</button>
 						<button className="button" onClick={this.closeModal}>
 							Cancel
 						</button>
