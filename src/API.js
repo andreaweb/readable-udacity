@@ -35,6 +35,17 @@ export const getPostsInCategory = (category) =>
     .then(res => res.json())
     .then(data => data)
 
+export const deletePostById = (id) =>
+  fetch(`${api}/posts/${id}`, {
+      method: 'DELETE',
+      headers: headers
+    })
+    .then(res => {
+      res.json();
+      console.log(res.ok);
+      return res.ok
+    })
+
 export const changePost = (id, title, body) =>
   fetch(`${api}/posts/${id}`, {
       method: 'PUT',

@@ -4,7 +4,8 @@ import {
 	getPosts, 
 	getSpecificPost, 
 	createPost,
-	changePost
+	changePost,
+	deletePostById
 } 
 from '../API.js';
 
@@ -26,8 +27,8 @@ function receivePosts(posts){
 function receivePost(post){
 	return { type: GET_POST, post}
 }
-function receiveResponse(response){
-	return { type: GET_RESPONSE, response}
+function confirmPostDeletion(response){
+	return { type: DELETE_POST, response}
 }
 function receiveCategories(categories){
 	return { type: GET_CATEGORIES, categories}
@@ -90,12 +91,25 @@ export function getPost(postID){
 	}	
 }
 
+export function deletePost(postID){
+	return dispatch => {
+		return deletePostById(postID)
+			.then(
+				(response) => {
+					dispatch(
+						confirmPostDeletion(response)
+					)
+				}
+			)
+	}
+}
+
 export function editPost(postID, postTitle, postBody){
 	console.log('action says' + postID, postTitle, postBody)
 	return dispatch => {
 		return changePost(postID, postTitle, postBody)
 			.then(
-				(post, response) => { 
+				(post) => { 
 					dispatch(
 						receivePost(post)
 //						,receiveResponse(response)

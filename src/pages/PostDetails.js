@@ -3,14 +3,17 @@ import {Link} from 'react-router-dom';
 import Header from '../components/Header';
 import Aside from '../components/Aside';
 import { connect } from 'react-redux';
-import { getPost, getCommentsFromPost } from '../actions/actions.js';
+import { deletePost, getPost, getCommentsFromPost } from '../actions/actions.js';
 
 class PostDetails extends React.Component{
 	componentDidMount(){
-		this.id = this.props.location.pathname.replace('/post-details/', '')
+		this.id = this.props.location.pathname.replace(/[/][a-z-]+[/]/, '')
 		console.log(this.id)
 		this.props.dispatch(getPost(this.id))
 		this.props.dispatch(getCommentsFromPost(this.id))
+  	}
+  	deletePost = () => {
+  		this.props.dispatch(deletePost(this.id))
   	}
 	render(){
 		return(
@@ -18,100 +21,105 @@ class PostDetails extends React.Component{
 			<Header />
 			{this.props.post
 				?
-					<main className="container container--main">
-						<Aside page="post-details" />
-						<section className="post-details">
-							<h2 className="post-details__name">
-								{this.props.post.title}
-							</h2>
-							<section className="post-details__edit">
-								<Link 
-									to={`/edit-post/${this.props.post.id}`} 
-								>
-									<button className="button button--edit">
-										<i className="fa fa-pencil" />
-
-											Edit
-									</button>
-								</Link>
-								<button className="button button-delete">
-									<i className="fa fa-trash" />
-									Delete
-								</button>
-							</section>
-							<div className="post-details__votes">
-								<i className="fa fa-caret-up" />
-								<p className="votes">
-									{this.props.post.voteScore}
-								</p>
-								<i className="fa fa-caret-down" />
-							</div>
-							<div className="post-details__post">
-								<p className="post-details__body">
-									{this.props.post.body}
-								</p>
-								<span>
-								  <em><b>By: </b></em>
-							      {this.props.post.author},  
-							      <em><b> Posted At: </b></em>
-		              				{new Date(this.props.post.timestamp).toLocaleString("en-US", {
-							              "day": "numeric",
-							              "hour":"numeric",
-							              "minute":"numeric",
-							              "month":"short",
-							              "year":"numeric"
-							      	})}
-		              			</span>
-							</div>
-						</section>
-						{this.props.comments
-						?
-						this.props.comments.map(
-							(comment, key) =>
-						<section className="comments">
-							<p className="comment">
-								{comment.body}
-							</p>
-							<div>
-								<p className="comment-details">
-									<em><b>By: </b></em>
-									<span className="comment-detail">
-							       		{comment.author}, 
-							       	</span> 
-								    <span className="comment-detail">
-								    	<em><b> Posted At: </b></em>
-								    </span>
-								    <span className="comment-detail">
-			              				{new Date(comment.timestamp).toLocaleString("en-US", {
-							              "day": "numeric",
-							              "hour":"numeric",
-							              "minute":"numeric",
-							              "month":"short",
-							              "year":"numeric"
-							      		})}
-						      		</span>
-		              			</p>
-							</div>
-							<section className="comment-buttons">
-								<button className="button button--small button--edit">
+				<main className="container container--main">
+					<Aside page="post-details" />
+					<section className="post-details">
+						<h2 className="post-details__name">
+							{this.props.post.title}
+						</h2>
+						<section className="post-details__edit">
+							<Link 
+								to={`/edit-post/${this.props.post.id}`} 
+							>
+								<button className="button button--edit">
 									<i className="fa fa-pencil" />
-									Edit
+
+										Edit
 								</button>
-								<button className="button button--small button-delete">
-									<i className="fa fa-trash" />
-									Delete
-								</button>
-								<span className="comment-votes">
-						      		<i className="fa fa-caret-up" />
-						      	  	 {comment.voteScore}
-						      	  	<i className="fa fa-caret-down" />
-					      	  	</span>
-				      	  	</section>
+							</Link>
+							<button className="button button-delete" onClick={this.deletePost}>
+								<i className="fa fa-trash" />
+								Delete
+							</button>
 						</section>
+						<div className="post-details__votes">
+							<i className="fa fa-caret-up" />
+							<p className="votes">
+								{this.props.post.voteScore}
+							</p>
+							<i className="fa fa-caret-down" />
+						</div>
+						<div className="post-details__post">
+							<p className="post-details__body">
+								{this.props.post.body}
+							</p>
+							<span>
+							  <em><b>By: </b></em>
+						      {this.props.post.author},  
+						      <em><b> Posted At: </b></em>
+	              				{new Date(this.props.post.timestamp).toLocaleString("en-US", {
+						              "day": "numeric",
+						              "hour":"numeric",
+						              "minute":"numeric",
+						              "month":"short",
+						              "year":"numeric"
+						      	})}
+	              			</span>
+						</div>
+					</section>
+					<section className="comments">
+						<button className="button">
+							Add a new comment
+						</button>
+						{this.props.comments
+							?
+							this.props.comments.map(
+								(comment, key) =>
+							<div className="comment">
+								<p>
+									{comment.body}
+								</p>
+								<div>
+									<p className="comment-details">
+										<em><b>By: </b></em>
+										<span className="comment-detail">
+								       		{comment.author}, 
+								       	</span> 
+									    <span className="comment-detail">
+									    	<em><b> Posted At: </b></em>
+									    </span>
+									    <span className="comment-detail">
+				              				{new Date(comment.timestamp).toLocaleString("en-US", {
+								              "day": "numeric",
+								              "hour":"numeric",
+								              "minute":"numeric",
+								              "month":"short",
+								              "year":"numeric"
+								      		})}
+							      		</span>
+			              			</p>
+								</div>
+								<section className="comment-buttons">
+									<button className="button button--small button--edit">
+										<i className="fa fa-pencil" />
+										Edit
+									</button>
+									<button className="button button--small button-delete">
+										<i className="fa fa-trash" />
+										Delete
+									</button>
+									<span className="comment-votes">
+							      		<i className="fa fa-caret-up" />
+							      	  	 {comment.voteScore}
+							      	  	<i className="fa fa-caret-down" />
+						      	  	</span>
+					      	  	</section>
+				      		</div>
 						)
 						: null
-					}
-					</main>
+						}
+					</section>
+				</main>
 				: null
 			}
 			</div>
