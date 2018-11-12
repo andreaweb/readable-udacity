@@ -12,13 +12,13 @@ class NewPost extends React.Component{
 		details: ''
 	}
 	componentDidMount(){
-		this.id = this.props.location.pathname.replace('/edit-post/', '')
+		this.id = this.props.location.pathname.replace(/[a-z-/]+/, '')
 		if(this.id){
-				this.props.dispatch(
-					getPost(this.id)
-				).then(() => {
-					this.setCurrentValues()
-				})
+			this.props.dispatch(
+				getPost(this.id)
+			).then(() => {
+				this.setCurrentValues()
+			})
 		}
 		this.props.dispatch(getAllCategories())
 	}
@@ -123,7 +123,7 @@ class NewPost extends React.Component{
 
 						<div className="new-post__buttons">
 							<button onClick={this.sendRequest} className="button button--submit">
-								Post
+								{this.id ? 'Edit' : 'Post' }
 							</button>
 							<button className="button button--cancel">
 								<Link className="remove-styles-link" to="/">
