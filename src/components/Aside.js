@@ -5,8 +5,9 @@ import {Link} from 'react-router-dom';
 
 class Aside extends React.Component{
 	componentDidMount(){
+		//this.id = this.props.location.pathname.replace(/[/][a-z-]+[/]/, '')
 		this.props.dispatch(getAllCategories())
-		this.props.dispatch(getPost("8xf0y6ziyjabvozdd253nd"))
+		//this.props.dispatch(getPost(this.id))
 	}
 	render(){
 		return(

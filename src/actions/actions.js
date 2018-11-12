@@ -79,6 +79,7 @@ export function getAllPosts(){
 }
 
 export function getPost(postID){
+	console.log(postID)
 	return dispatch => {
 		return getSpecificPost(postID)
 			.then(

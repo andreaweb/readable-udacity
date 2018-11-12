@@ -9,7 +9,9 @@ class PostDetails extends React.Component{
 	componentDidMount(){
 		this.id = this.props.location.pathname.replace(/[/][a-z-]+[/]/, '')
 		console.log(this.id)
-		this.props.dispatch(getPost(this.id))
+		console.log(
+			this.props.dispatch(getPost(this.id))
+		)
 		this.props.dispatch(getCommentsFromPost(this.id))
   	}
   	deletePost = () => {
@@ -130,7 +132,7 @@ class PostDetails extends React.Component{
 function mapStateToProps(state){
 	const { post } = state.post
 	const { comments } = state.comments
-	return { post, comments}
+	return { post, comments }
 }
 
 export default connect(mapStateToProps)(PostDetails)
