@@ -3,9 +3,16 @@ import {Link} from 'react-router-dom';
 import Header from '../components/Header';
 import Aside from '../components/Aside';
 import { connect } from 'react-redux';
-import { deletePost, getPost, getCommentsFromPost } from '../actions/actions.js';
+import { addNewComment,
+		deletePost, 
+		getPost, 
+		getCommentsFromPost } 
+from '../actions/actions.js';
 
 class PostDetails extends React.Component{
+	state = {
+		isModalOpen: true
+	}
 	componentDidMount(){
 		this.id = this.props.location.pathname.replace(/[/][a-z-]+[/]/, '')
 		console.log(this.id)
@@ -17,11 +24,55 @@ class PostDetails extends React.Component{
   	deletePost = () => {
   		this.props.dispatch(deletePost(this.id))
   	}
+  	addComment = () => {
+  		let comment = {
+	  		body: 'Listening to a Power Metal Collection',
+	        id: Math.random().toString(36).substr(-8),
+	        timestamp: Date.now(),
+	        author: 'vol106',
+	        parentId: this.id 
+	    }
+  		if(this.props.dispatch(addNewComment(comment))){
+  			alert("new comment added")
+  		}else{
+  			alert('your new comment didnt work')
+  		}
+  	}
+  	openModal = () => {
+  		this.setState({isModalOpen: true})
+  	}
+  	closeModal = () => {
+  		this.setState({isModalOpen: false})
+  	}
 	render(){
 		return(
 			<div className="App">
-			<Header />
-			{this.props.post
+				<div className={this.state.isModalOpen === true ? 'modal modal--open' : 'modal'}>
+					<section className="modal-content">
+						<h4>New Comment</h4>
+						<div className="new-post__text">
+							<label>Your Name or Nickname:</label>
+							<input 
+							id="author"
+							className="new-post__input" 
+							onChange={this.handleChange}
+							/>
+						</div>
+						<div className="new-post__details">
+							<label>Details:</label>
+							<textarea 
+							id="details"
+							onChange={this.handleChange}
+							className="new-post__textarea" 
+							/>
+						</div>
+						<button className="button" onClick={this.closeModal}>
+							Cancel
+						</button>
+					</section>
+				</div>
+				<Header />
+				{this.props.post
 				?
 				<main className="container container--main">
 					<Aside page="post-details" />
@@ -70,7 +121,7 @@ class PostDetails extends React.Component{
 						</div>
 					</section>
 					<section className="comments">
-						<button className="button">
+						<button className="button button--small" onClick={this.openModal}>
 							Add a new comment
 						</button>
 						{this.props.comments

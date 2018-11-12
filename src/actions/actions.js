@@ -4,6 +4,7 @@ import {
 	getPosts, 
 	getSpecificPost, 
 	createPost,
+	createComment,
 	changePost,
 	deletePostById
 } 
@@ -30,6 +31,9 @@ function receivePost(post){
 function confirmPostDeletion(response){
 	return { type: DELETE_POST, response}
 }
+function receiveResponse(response){
+	return { type: GET_RESPONSE, response}
+}
 function receiveCategories(categories){
 	return { type: GET_CATEGORIES, categories}
 }
@@ -38,6 +42,17 @@ function receiveComments(comments){
 }
 function receiveNewPost(response){
 	return { type: GET_NEW_POST, response}
+}
+
+export function addNewComment(comment){
+	return dispatch => {
+		return createComment(comment)
+			.then(
+				response => {
+					dispatch(receiveResponse(response))
+				}
+			)
+	}
 }
 
 export function createNewPost(post){

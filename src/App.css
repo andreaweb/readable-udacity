@@ -222,6 +222,25 @@ fieldset{
   margin: 20px 0 0;
 }
 
+.modal{
+  position: absolute;
+  background: rgba(0,0,0,.7);
+  height: 100vh;
+  width: 100vw;
+  z-index: 999;
+  display: none
+}
+.modal--open{
+  display: block
+}
+.modal-content{
+  position: absolute;
+  width: 50vw;
+  padding: 10px;
+  top: 11vh;
+  left: 33vh;
+  background-color: #fff;
+}
 /*utility*/
 .remove-styles-link{
   text-decoration: none;
