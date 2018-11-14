@@ -6,13 +6,17 @@ import Comment from '../components/Comment';
 import { connect } from 'react-redux';
 import { addNewComment,
 		deletePost, 
+		editCommentByID,
 		getPost, 
 		getCommentsFromPost } 
 from '../actions/actions.js';
 
 class PostDetails extends React.Component{
 	state = {
-		isModalOpen: false
+		isModalOpen: false,
+		author: '',
+		body: '',
+		comment: null
 	}
 	componentDidMount(){
 		this.id = this.props.location.pathname.replace(/[/][a-z-]+[/]/, '')
@@ -25,11 +29,43 @@ class PostDetails extends React.Component{
   	deletePost = () => {
   		this.props.dispatch(deletePost(this.id))
   	}
-  	openModal = () => {
+  	handleChange = (e) => {
+  		this.setState({[e.target.id]: e.target.value})
+  	}
+  	openModal = (commentID) => {
+  		if(typeof commentID === 'string'){
+  			let findComment = this.props.comments.find((comment) => comment.id === commentID) 
+  			this.setState({
+  				author: findComment.author,
+  				body: findComment.body,
+  				comment: commentID
+  			})
+  		}
 		this.setState({isModalOpen: true})
   	}
   	closeModal = () => {
   		this.setState({isModalOpen: false})
+  	}
+  	editComment = (commentID) => {
+  		this.props.dispatch(
+  			editCommentByID(
+  				commentID,'e cantando assim parece que o tempo voa'
+  			)
+  		)
+  	}
+  	addComment = () => {
+  		let comment = {
+	  		body: this.state.body,
+	        id: Math.random().toString(36).substr(-8),
+	        timestamp: Date.now(),
+	        author: this.state.author,
+	        parentId: this.id 
+	    }
+  		if(this.props.dispatch(addNewComment(comment))){
+  			alert("new comment added")
+  		}else{
+  			alert('your new comment didnt work')
+  		}
   	}
 	render(){
 		return(
@@ -40,21 +76,28 @@ class PostDetails extends React.Component{
 						<div className="new-post__text">
 							<label>Your Name or Nickname:</label>
 							<input 
-							id="author"
-							className="new-post__input" 
-							onChange={this.handleChange}
+								id="author"
+								className="new-post__input"
+								value={this.state.author} 
+								onChange={this.handleChange}
 							/>
 						</div>
 						<div className="new-post__details">
 							<label>Details:</label>
 							<textarea 
-							id="body"
-							onChange={this.handleChange}
-							className="new-post__textarea" 
+								id="body"
+								onChange={this.handleChange}
+								value={this.state.body}
+								className="new-post__textarea" 
 							/>
 						</div>
-						<button className="button" onClick={this.addComment}>
-							Comment
+						<button 
+							className="button" 
+							onClick={this.state.comment 
+								? () => this.editComment(this.state.comment)
+								: this.addComment }
+						>
+							{this.state.comment ? 'Edit' : 'Comment'}
 						</button>
 						<button className="button" onClick={this.closeModal}>
 							Cancel
@@ -118,7 +161,11 @@ class PostDetails extends React.Component{
 							?
 							this.props.comments.map(
 								(comment, key) =>
-							<Comment comment={comment} key={comment.id} />
+							<Comment 
+								comment={comment} 
+								key={comment.id} 
+								openModal={() => this.openModal(comment.id)}
+							/>
 						)
 						: null
 						}

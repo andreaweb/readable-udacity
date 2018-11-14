@@ -73,6 +73,19 @@ export const changePost = (id, title, body) =>
     return res.ok
   })
 
+export const editComment = (id, body) =>
+  fetch(`${api}/comments/${id}`, {
+      method: 'PUT',
+      headers: headers,
+      body: JSON.stringify({body})
+    }
+  )
+  .then(res => {
+    res.json();
+    console.log(res.ok);
+    return res.ok
+  })
+
 export const createComment = (comment) =>
   fetch(`${api}/comments/`, { 
       method: 'POST', 

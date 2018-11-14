@@ -6,6 +6,7 @@ import {
 	createPost,
 	createComment,
 	changePost,
+	editComment,
 	deletePostById,
 	deleteCommentById
 } 
@@ -19,6 +20,7 @@ export const GET_RESPONSE = 'GET_RESPONSE';
 export const EDIT_COMMENT = 'EDIT_COMMENT';
 export const GET_CATEGORIES = 'GET_CATEGORIES';
 export const GET_COMMENTS = 'GET_COMMENTS';
+export const GET_COMMENT = 'GET_COMMENT';
 export const GET_NEW_POST = 'GET_NEW_POST';
 export const GET_POSTS = 'GET_POSTS';
 export const GET_POST = 'GET_POST';
@@ -40,6 +42,9 @@ function receiveCategories(categories){
 }
 function receiveComments(comments){
 	return { type: GET_COMMENTS, comments}
+}
+function receiveComment(comment){
+	return { type: GET_COMMENT, comment}
 }
 function receiveNewPost(response){
 	return { type: GET_NEW_POST, response}
@@ -95,7 +100,6 @@ export function getAllPosts(){
 }
 
 export function getPost(postID){
-	console.log(postID)
 	return dispatch => {
 		return getSpecificPost(postID)
 			.then(
@@ -135,7 +139,6 @@ export function deleteCommentByID(commentID){
 }
 
 export function editPost(postID, postTitle, postBody){
-	console.log('action says' + postID, postTitle, postBody)
 	return dispatch => {
 		return changePost(postID, postTitle, postBody)
 			.then(
@@ -147,6 +150,19 @@ export function editPost(postID, postTitle, postBody){
 				}
 			)
 	}	
+}
+
+export function editCommentByID(commentID, commentBody){
+	return dispatch => {
+		return editComment(commentID, commentBody)
+			.then(
+				(comment) => {
+					dispatch(
+						receiveComment(comment)
+					)
+				}
+			)
+	}
 }
 
 export function getAllCategories(){
