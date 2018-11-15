@@ -13,6 +13,7 @@ class Home extends Component {
   componentDidMount(){
       this.props.dispatch(getAllPosts())
       this.filterCategories()
+      this.sortPosts('date')
       // console.log(
       //   this.props.dispatch(getPost(this.id))
       // )
@@ -29,16 +30,31 @@ class Home extends Component {
       ? this.activeFilter = (post) => post.category === this.filter 
       : this.activeFilter = () => true
   }
+  sortPosts = (value) => {
+    console.log(value)
+    value === 'date'
+    ?  this.activeSort = (a,b) => b.timestamp - a.timestamp
+    :  this.activeSort = (a,b) => a.timestamp - b.timestamp
+    this.props.posts ?
+    //without the filter it doesn't change
+    //the filter can be in any order
+    console.log(
+      this.props.posts.sort(this.activeSort).filter(this.activeFilter).map((post) => post.category)
+    )
+    : console.log('waiting')
+    this.forceUpdate()
+  }
   render() {
     return (
       <div className="App">
         <Header reload={() => this.filterCategories()} />
         <main className="container container--main">
-          <Aside page="home"/>
+          <Aside page="home" sortBy={(value) => this.sortPosts(value)} />
           { this.props.posts
             ? 
             this.props.posts
             .filter(this.activeFilter)
+            .sort(this.activeSort)
             .map(
               (post, key)=>
               <Post post={post} key={key} reload={(category) => this.filterCategories(category)} />

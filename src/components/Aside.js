@@ -30,13 +30,18 @@ class Aside extends React.Component{
 		              <label className="order-by__label">
 		                Order By
 		              </label>
-		              <select className="order-by__select">
-		                <option>Date</option>
-		                <option>Votes</option>
+		              <select 
+		              	className="order-by__select" 
+		              	onChange={(e) => this.props.sortBy(e.target.value)}
+		              	>
+		                <option value="date">Date</option>
+		                <option value="votes">Votes</option>
 		              </select>
 		            </div>
 		            <ul className="categories">
-		              <li className="categories__title">Categories</li>
+		              <li className="categories__title">
+		              	Categories
+		              </li>
 		              { this.props.categories 
 		              	? this.props.categories.map(
 		              			(cat, key) =>
