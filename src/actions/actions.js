@@ -8,6 +8,7 @@ import {
 	changePost,
 	editComment,
 	voteComment,
+	votePost,
 	deletePostById,
 	deleteCommentById
 } 
@@ -166,14 +167,14 @@ export function voteCommentByID(commentID, option){
 	}	
 }
 
-export function votePost(postID, postTitle, postBody){
+export function votePostByID(postID, option){
 	return dispatch => {
-		return changePost(postID, postTitle, postBody)
+		return votePost(postID, option)
 			.then(
-				(post) => { 
+				(response) => { 
 					dispatch(
-						receivePost(post)
-//						,receiveResponse(response)
+						//receivePost(post)
+						receiveResponse(response)
 					)
 				}
 			)

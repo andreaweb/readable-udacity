@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { addNewComment,
 		deletePost, 
 		editCommentByID,
+		votePostByID,
 		getPost, 
 		getCommentsFromPost } 
 from '../actions/actions.js';
@@ -46,6 +47,12 @@ class PostDetails extends React.Component{
   	closeModal = () => {
   		this.setState({isModalOpen: false})
   		this.setState({comment: null})
+  	}
+  	upvote = (postID) => {
+  		this.props.dispatch(votePostByID(postID, 'upVote'))
+  	}
+  	downvote = (postID) => {
+  		this.props.dispatch(votePostByID(postID, 'downVote'))
   	}
   	editComment = (commentID) => {
   		this.props.dispatch(editCommentByID(commentID, this.state.body))
@@ -127,11 +134,11 @@ class PostDetails extends React.Component{
 							</button>
 						</section>
 						<div className="post-details__votes">
-							<i className="fa fa-caret-up" onClick={this.upvote} />
+							<i className="fa fa-caret-up" onClick={() => this.upvote(this.props.post.id)} />
 							<p className="votes">
 								{this.props.post.voteScore}
 							</p>
-							<i className="fa fa-caret-down" onClick={this.downvote} />
+							<i className="fa fa-caret-down" onClick={() => this.downvote(this.props.post.id)} />
 						</div>
 						<div className="post-details__post">
 							<p className="post-details__body">
