@@ -12,18 +12,36 @@ import '../App.css';
 class Home extends Component {
   componentDidMount(){
       this.props.dispatch(getAllPosts())
+      this.filterCategories()
+      // console.log(
+      //   this.props.dispatch(getPost(this.id))
+      // )
+      // this.props.dispatch(getCommentsFromPost(this.id))
+  }
+  filterCategories = (category) => {
+    if(typeof category === 'string'){
+      this.filter = category
+    }else{
+      this.filter = this.props.location.pathname.replace(/[/][a-z-]+[/]/, '')
+    }
+      console.log(this.filter)
+      this.filter.length > 1
+      ? this.activeFilter = (post) => post.category === this.filter 
+      : this.activeFilter = () => true
   }
   render() {
     return (
       <div className="App">
-        <Header />
+        <Header reload={() => this.filterCategories()} />
         <main className="container container--main">
           <Aside page="home"/>
           { this.props.posts
             ? 
-            this.props.posts.map(
+            this.props.posts
+            .filter(this.activeFilter)
+            .map(
               (post, key)=>
-              <Post post={post} key={key} />
+              <Post post={post} key={key} reload={(category) => this.filterCategories(category)} />
             )
             : null
           }  

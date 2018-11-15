@@ -12,7 +12,7 @@ ReactDOM.render(
 	<Provider store={store}>
 		<BrowserRouter>
 			<Switch>
-				<Route component={Home} path="/" exact />
+				<Route component={Home} path="/(post-categories|)" />
 				<Route component={NewPost} path="/(new-post|edit-post)/" />
 				<Route component={PostDetails} path="/post-details" />
 			</Switch>
