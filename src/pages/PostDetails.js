@@ -45,13 +45,11 @@ class PostDetails extends React.Component{
   	}
   	closeModal = () => {
   		this.setState({isModalOpen: false})
+  		this.setState({comment: null})
   	}
   	editComment = (commentID) => {
-  		this.props.dispatch(
-  			editCommentByID(
-  				commentID,'e cantando assim parece que o tempo voa'
-  			)
-  		)
+  		this.props.dispatch(editCommentByID(commentID, this.state.body))
+  		this.setState({comment: null})
   	}
   	addComment = () => {
   		let comment = {
@@ -129,11 +127,11 @@ class PostDetails extends React.Component{
 							</button>
 						</section>
 						<div className="post-details__votes">
-							<i className="fa fa-caret-up" />
+							<i className="fa fa-caret-up" onClick={this.upvote} />
 							<p className="votes">
 								{this.props.post.voteScore}
 							</p>
-							<i className="fa fa-caret-down" />
+							<i className="fa fa-caret-down" onClick={this.downvote} />
 						</div>
 						<div className="post-details__post">
 							<p className="post-details__body">

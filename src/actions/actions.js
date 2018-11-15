@@ -7,6 +7,7 @@ import {
 	createComment,
 	changePost,
 	editComment,
+	voteComment,
 	deletePostById,
 	deleteCommentById
 } 
@@ -139,6 +140,33 @@ export function deleteCommentByID(commentID){
 }
 
 export function editPost(postID, postTitle, postBody){
+	return dispatch => {
+		return changePost(postID, postTitle, postBody)
+			.then(
+				(post) => { 
+					dispatch(
+						receivePost(post)
+//						,receiveResponse(response)
+					)
+				}
+			)
+	}	
+}
+
+export function voteCommentByID(commentID, option){
+	return dispatch => {
+		return voteComment(commentID, option)
+			.then(
+				(response) => { 
+					dispatch(
+						receiveResponse(response)
+					)
+				}
+			)
+	}	
+}
+
+export function votePost(postID, postTitle, postBody){
 	return dispatch => {
 		return changePost(postID, postTitle, postBody)
 			.then(

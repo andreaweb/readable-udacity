@@ -1,10 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { deleteCommentByID} from '../actions/actions.js';
+import { deleteCommentByID,voteCommentByID} from '../actions/actions.js';
 
 class Comment extends React.Component{
 	deleteComment = (commentID) => {
   		this.props.dispatch(deleteCommentByID(commentID))
+  	}
+  	upvote = (commentID) => {
+  		this.props.dispatch(voteCommentByID(commentID, 'upVote'))
+  	}
+  	downvote = (commentID) => {
+  		this.props.dispatch(voteCommentByID(commentID, 'downVote'))
   	}
 	render(){
 			return (
@@ -48,9 +54,15 @@ class Comment extends React.Component{
 								Delete
 							</button>
 							<span className="comment-votes">
-					      		<i className="fa fa-caret-up" />
+					      		<i 
+					      			className="fa fa-caret-up" 
+					      			onClick={() => this.upvote(this.props.comment.id)} 
+					      		/>
 					      	  	 {this.props.comment.voteScore}
-					      	  	<i className="fa fa-caret-down" />
+					      	  	<i 
+					      	  		className="fa fa-caret-down" 
+					      	  		onClick={() => this.downvote(this.props.comment.id)} 
+					      	  	/>
 				      	  	</span>
 			      	  	</section>
 			      	</div>

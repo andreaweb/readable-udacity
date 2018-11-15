@@ -86,6 +86,28 @@ export const editComment = (id, body) =>
     return res.ok
   })
 
+export const votePost = (postID, option) =>
+  fetch(`${api}/posts/${postID}`, { 
+      method: 'POST', 
+      headers: headers, 
+      option: JSON.stringify(
+        option
+      )
+    }
+  )
+  .then(res => res.json())
+  .then(comments => comments)
+
+export const voteComment = (commentID, option) =>
+  fetch(`${api}/comments/${commentID}`, { 
+      method: 'POST',
+      headers: headers, 
+      body: JSON.stringify({option: option})
+    }
+  )
+  .then(res => {console.log(res.json());console.log([commentID]); return res})
+  .then(comments => comments)
+
 export const createComment = (comment) =>
   fetch(`${api}/comments/`, { 
       method: 'POST', 
