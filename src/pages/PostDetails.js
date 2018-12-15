@@ -67,7 +67,7 @@ class PostDetails extends React.Component{
 	        parentId: this.id 
 	    }
   		if(this.props.dispatch(addNewComment(comment))){
-  			alert("new comment added")
+  			this.closeModal();
   		}else{
   			alert('your new comment didnt work')
   		}
@@ -110,8 +110,7 @@ class PostDetails extends React.Component{
 					</section>
 				</div>
 				<Header />
-				{this.props.post
-				?
+				{this.props.post &&
 				<main className="container container--main">
 					<Aside page="post-details" />
 					<section className="post-details">
@@ -146,37 +145,33 @@ class PostDetails extends React.Component{
 							</p>
 							<span>
 							  <em><b>By: </b></em>
-						      {this.props.post.author},  
-						      <em><b> Posted At: </b></em>
-	              				{new Date(this.props.post.timestamp).toLocaleString("en-US", {
-						              "day": "numeric",
-						              "hour":"numeric",
-						              "minute":"numeric",
-						              "month":"short",
-						              "year":"numeric"
-						      	})}
-	              			</span>
+					      {this.props.post.author},  
+					      <em><b> Posted At: </b></em>
+              				{new Date(this.props.post.timestamp).toLocaleString("en-US", {
+					              "day": "numeric",
+					              "hour":"numeric",
+					              "minute":"numeric",
+					              "month":"short",
+					              "year":"numeric"
+					      	})}
+	            </span>
 						</div>
 					</section>
 					<section className="comments">
 						<button className="button button--small" onClick={this.openModal}>
 							Add a new comment
 						</button>
-						{this.props.comments
-							?
-							this.props.comments.map(
-								(comment, key) =>
+						{this.props.comments &&	this.props.comments.map(
+							(comment, key) =>
 							<Comment 
 								comment={comment} 
 								key={comment.id} 
 								openModal={() => this.openModal(comment.id)}
 							/>
 						)
-						: null
 						}
 					</section>
 				</main>
-				: null
 			}
 			</div>
 		)

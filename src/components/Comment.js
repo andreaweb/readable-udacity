@@ -1,17 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { deleteCommentByID,voteCommentByID} from '../actions/actions.js';
+import { deleteCommentByID, voteCommentByID } from '../actions/actions.js';
 
 class Comment extends React.Component{
 	deleteComment = (commentID) => {
-  		this.props.dispatch(deleteCommentByID(commentID))
-  	}
-  	upvote = (commentID) => {
-  		this.props.dispatch(voteCommentByID(commentID, 'upVote'))
-  	}
-  	downvote = (commentID) => {
-  		this.props.dispatch(voteCommentByID(commentID, 'downVote'))
-  	}
+		this.props.dispatch(deleteCommentByID(commentID))
+	}
+	upvote = (commentID) => {
+		this.props.dispatch(voteCommentByID(commentID, 'upVote'))
+	}
+	downvote = (commentID) => {
+		this.props.dispatch(voteCommentByID(commentID, 'downVote'))
+	}
 	render(){
 			return (
 					<div className="comment">

@@ -54,7 +54,7 @@ export function addNewComment(comment){
 		return createComment(comment)
 			.then(
 				response => {
-					dispatch(receiveResponse(response))
+					dispatch(getCommentsFromPost(response))
 				}
 			)
 	}

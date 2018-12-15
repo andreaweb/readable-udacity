@@ -106,6 +106,7 @@ export const voteComment = (commentID, option) =>
   .then(res => {console.log(res.json());console.log([commentID]); return res})
   .then(comments => comments)
 
+
 export const createComment = (comment) =>
   fetch(`${api}/comments/`, { 
       method: 'POST', 
@@ -116,7 +117,8 @@ export const createComment = (comment) =>
     }
   )
   .then(res => res.json())
-  .then(comments => comments)
+  .then(comment => comment.parentId)
+  .catch(error => error)
 
 export const createPost = (post) =>
   fetch(`${api}/posts/`, { 
