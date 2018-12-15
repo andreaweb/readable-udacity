@@ -6,12 +6,18 @@ import Aside from '../components/Aside';
 import Header from '../components/Header';
 import Post from '../components/Post';
 import logo from '../logo.svg';
-import { getAllPosts } from '../actions/actions.js';
+import { votePostByID,getAllPosts } from '../actions/actions.js';
 import '../App.css';
 
 class Home extends Component {
   state = {
     activeFilter: () => true
+  }
+  upvote = (postID) => {
+    this.props.dispatch(votePostByID(postID, 'upVote'))
+  }
+  downvote = (postID) => {
+    this.props.dispatch(votePostByID(postID, 'downVote'))
   }
   componentDidMount(){
       this.props.dispatch(getAllPosts())
@@ -59,7 +65,13 @@ class Home extends Component {
             .sort(this.state.activeSort)
             .map(
               (post, key)=>
-              <Post post={post} key={key} reload={(category) => this.filterCategories(category)} />
+              <Post 
+                post={post} 
+                key={key} 
+                reload={(category) => this.filterCategories(category)} 
+                upvote={(id) => this.upvote(id)}
+                downvote={(id) => this.downvote(id)}
+              />
             )
           }  
         </main>

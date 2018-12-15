@@ -17,11 +17,11 @@ const Post = (props) =>(
       </h4>
     </Link>
     <div className="post__votes">
-      <i className="fa fa-caret-up" />
+      <i className="fa fa-caret-up" onClick={() => props.upvote(props.post.id)}/>
       <p className="votes">
         {props.post.voteScore}
       </p>
-      <i className="fa fa-caret-down" />
+      <i className="fa fa-caret-down" onClick={() => props.downvote(props.post.id)}/>
     </div>
     <div className="post__summary">
       <p className="post__body">
