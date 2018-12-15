@@ -35,7 +35,8 @@ class PostDetails extends React.Component{
 		this.props.dispatch(getCommentsFromPost(this.id))
   	}
   	deletePost = () => {
-  		this.props.dispatch(deletePost(this.id))
+  		this.props.dispatch(deletePost(this.id));
+  		this.props.history.push(`/`);
   	}
   	handleChange = (e) => {
   		this.setState({[e.target.id]: e.target.value})
@@ -49,7 +50,7 @@ class PostDetails extends React.Component{
   				comment: commentID
   			})
   		}
-		this.setState({isModalOpen: true})
+			this.setState({isModalOpen: true})
   	}
   	closeModal = () => {
   		this.setState({isModalOpen: false})
