@@ -12,7 +12,7 @@ class NewPost extends React.Component{
 		details: ''
 	}
 	componentDidMount(){
-		this.id = this.props.location.pathname.replace(/[/][a-z-]+[/]/, '')
+		this.id = this.props.match.params.id;
 		if(this.id){
 			this.props.dispatch(
 				getPost(this.id)

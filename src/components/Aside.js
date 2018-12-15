@@ -43,11 +43,10 @@ class Aside extends React.Component{
 		              	Categories
 		              </li>
 		              { this.props.categories 
-		              	? this.props.categories.map(
+		              	&& this.props.categories.map(
 		              			(cat, key) =>
 		              			<li key={key}>{cat.name}</li>
 		              		)
-		              	: null
 		              }
 		            </ul>
 		        </section>

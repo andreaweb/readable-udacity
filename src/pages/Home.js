@@ -10,6 +10,9 @@ import { getAllPosts } from '../actions/actions.js';
 import '../App.css';
 
 class Home extends Component {
+  state = {
+    activeFilter: () => true
+  }
   componentDidMount(){
       this.props.dispatch(getAllPosts())
       this.filterCategories()
@@ -20,29 +23,29 @@ class Home extends Component {
       // this.props.dispatch(getCommentsFromPost(this.id))
   }
   filterCategories = (category) => {
-    if(typeof category === 'string'){
+    if(category){
       this.filter = category
+      this.setState({activeFilter: (post) => post.category === this.filter})
     }else{
-      this.filter = this.props.location.pathname.replace(/[/][a-z-]+[/]/, '')
+      this.setState({activeFilter: () => true})
     }
-      console.log(this.filter)
-      this.filter.length > 1
-      ? this.activeFilter = (post) => post.category === this.filter 
-      : this.activeFilter = () => true
   }
   sortPosts = (value) => {
     console.log(value)
-    value === 'date'
-    ?  this.activeSort = (a,b) => b.timestamp - a.timestamp
-    :  this.activeSort = (a,b) => a.timestamp - b.timestamp
+    if(value === 'date'){
+      this.setState({activeSort: (a,b) => b.timestamp - a.timestamp})
+    }else{
+      this.setState({activeSort: (a,b) => a.timestamp - b.timestamp})
+    } 
     this.props.posts ?
     //without the filter it doesn't change
     //the filter can be in any order
     console.log(
-      this.props.posts.sort(this.activeSort).filter(this.activeFilter).map((post) => post.category)
+      this.props.posts.sort(this.state.activeSort)
+      .filter(this.state.activeFilter)
+      .map((post) => post.category)
     )
     : console.log('waiting')
-    this.forceUpdate()
   }
   render() {
     return (
@@ -50,16 +53,14 @@ class Home extends Component {
         <Header reload={() => this.filterCategories()} />
         <main className="container container--main">
           <Aside page="home" sortBy={(value) => this.sortPosts(value)} />
-          { this.props.posts
-            ? 
-            this.props.posts
-            .filter(this.activeFilter)
-            .sort(this.activeSort)
+          { this.props.posts 
+            && this.props.posts
+            .filter(this.state.activeFilter)
+            .sort(this.state.activeSort)
             .map(
               (post, key)=>
               <Post post={post} key={key} reload={(category) => this.filterCategories(category)} />
             )
-            : null
           }  
         </main>
       </div>
