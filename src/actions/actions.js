@@ -150,13 +150,11 @@ export function editPost(postID, postTitle, postBody){
 export function voteCommentByID(commentID, option){
 	return dispatch => {
 		return voteComment(commentID, option)
-			.then(
-				(response) => { 
-					dispatch(
-						receiveResponse(response)
-					)
-				}
-			)
+		.then(
+			response => {
+				dispatch(getCommentsFromPost(response))
+			}
+		)	
 	}	
 }
 

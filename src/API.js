@@ -99,8 +99,9 @@ export const voteComment = (commentID, option) =>
       body: JSON.stringify({option: option})
     }
   )
-  .then(res => {console.log(res.json());console.log([commentID]); return res})
-  .then(comments => comments)
+  .then(res => res.json())
+  .then(comment => comment.parentId)
+  .catch(error => error)
 
 
 export const createComment = (comment) =>
