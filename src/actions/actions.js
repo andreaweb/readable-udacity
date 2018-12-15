@@ -180,10 +180,8 @@ export function editCommentByID(commentID, commentBody){
 	return dispatch => {
 		return editComment(commentID, commentBody)
 			.then(
-				(comment) => {
-					dispatch(
-						receiveComment(comment)
-					)
+				response => {
+					dispatch(getCommentsFromPost(response))
 				}
 			)
 	}

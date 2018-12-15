@@ -80,11 +80,9 @@ export const editComment = (id, body) =>
       body: JSON.stringify({body})
     }
   )
-  .then(res => {
-    res.json();
-    console.log(res.ok);
-    return res.ok
-  })
+  .then(res => res.json())
+  .then(comment => comment.parentId)
+  .catch(error => error)
 
 export const votePost = (postID, option) =>
   fetch(`${api}/posts/${postID}`, { 

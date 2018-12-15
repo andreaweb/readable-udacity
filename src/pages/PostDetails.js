@@ -56,6 +56,7 @@ class PostDetails extends React.Component{
   	}
   	editComment = (commentID) => {
   		this.props.dispatch(editCommentByID(commentID, this.state.body))
+  		this.closeModal();
   		this.setState({comment: null})
   	}
   	addComment = () => {
