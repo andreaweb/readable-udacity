@@ -39,20 +39,22 @@ class NewPost extends React.Component{
 			&& this.state.author.length > 0
 			&& this.state.details.length > 0
 		){
-			if(this.id){			    
-				if(
-					this.props.dispatch(
+			if(this.id){	
+				(async () => { 
+					const postID = await this.props.dispatch(
 						editPost(
 							this.id,
 					        this.state.title, 
 					        this.state.details
 						)
 					)
-				){
-					alert("Post successfully edited! Woohoo!")
-				}else{
-					alert("Your post has not been changed :( Try again later")
-				}
+					if(postID){
+						alert("Post successfully edited! Woohoo!");
+						this.props.history.push(`/post-details/${postID}`);
+					}else{
+						alert("Your post has not been changed :( Try again later")
+					}
+				})()
 			}else{
 				(async () => { 
 					const newPostID = await this.props.dispatch(

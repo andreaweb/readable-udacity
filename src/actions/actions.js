@@ -64,10 +64,7 @@ export function createNewPost(post){
 	return dispatch => {
 		return createPost(post)
 			.then(
-				response => {
-					console.log(response);
-					return response;
-				}
+				response => response
 			)
 	}
 }
@@ -138,11 +135,7 @@ export function editPost(postID, postTitle, postBody){
 	return dispatch => {
 		return changePost(postID, postTitle, postBody)
 			.then(
-				(post) => { 
-					dispatch(
-						receivePost(post)
-					)
-				}
+				response => response
 			)
 	}	
 }

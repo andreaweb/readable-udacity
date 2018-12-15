@@ -65,11 +65,9 @@ export const changePost = (id, title, body) =>
       body: JSON.stringify({body, title: title})
     }
   )
-  .then(res => {
-    res.json();
-    console.log(res.ok);
-    return res.ok
-  })
+  .then(res => res.json())
+  .then(data => data.id)
+  .catch(error => error)
 
 export const editComment = (id, body) =>
   fetch(`${api}/comments/${id}`, {
