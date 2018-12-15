@@ -125,4 +125,6 @@ export const createPost = (post) =>
       body: post
     }
   )
-  .then(res => {res.json(); console.log(res.ok); return res.ok})
+  .then(res => res.json())
+  .then(data => data.id)
+  .catch(error => error)

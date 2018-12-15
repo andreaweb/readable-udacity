@@ -48,9 +48,6 @@ function receiveComments(comments){
 function receiveComment(comment){
 	return { type: GET_COMMENT, comment}
 }
-function receiveNewPost(response){
-	return { type: GET_NEW_POST, response}
-}
 
 export function addNewComment(comment){
 	return dispatch => {
@@ -68,9 +65,8 @@ export function createNewPost(post){
 		return createPost(post)
 			.then(
 				response => {
-					dispatch(
-						receiveNewPost(response)
-					)
+					console.log(response);
+					return response;
 				}
 			)
 	}
@@ -147,7 +143,6 @@ export function editPost(postID, postTitle, postBody){
 				(post) => { 
 					dispatch(
 						receivePost(post)
-//						,receiveResponse(response)
 					)
 				}
 			)

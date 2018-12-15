@@ -54,15 +54,17 @@ class NewPost extends React.Component{
 					alert("Your post has not been changed :( Try again later")
 				}
 			}else{
-				if(
-					this.props.dispatch(
+				(async () => { 
+					const newPostID = await this.props.dispatch(
 						createNewPost(this.stringifyPost())
 					)
-				){
-					alert("Post created! Yay!")
-				}else{
-					alert("Oops, something went wrong :(")
-				}
+					if(newPostID){
+						alert("Post created! Yay!");
+						this.props.history.push(`/post-details/${newPostID}`);
+					}else{
+						alert("Oops, something went wrong :(")
+					}
+				})()
 			}
 		//replace alerts by something more visually aesthetic 
 		}else{
