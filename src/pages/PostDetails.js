@@ -19,6 +19,13 @@ class PostDetails extends React.Component{
 		body: '',
 		comment: null
 	}
+	resetState = () => {
+		this.setState({
+			author: '',
+			body: '',
+			comment: null
+		})
+	}
 	componentDidMount(){
 		this.id = this.props.location.pathname.replace(/[/][a-z-]+[/]/, '')
 		console.log(this.id)
@@ -46,7 +53,7 @@ class PostDetails extends React.Component{
   	}
   	closeModal = () => {
   		this.setState({isModalOpen: false})
-  		this.setState({comment: null})
+  		this.resetState();
   	}
   	upvote = (postID) => {
   		this.props.dispatch(votePostByID(postID, 'upVote'))
@@ -57,7 +64,6 @@ class PostDetails extends React.Component{
   	editComment = (commentID) => {
   		this.props.dispatch(editCommentByID(commentID, this.state.body))
   		this.closeModal();
-  		this.setState({comment: null})
   	}
   	addComment = () => {
   		let comment = {

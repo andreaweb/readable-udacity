@@ -54,11 +54,9 @@ export const deleteCommentById = (id) =>
       method: 'DELETE',
       headers: headers
     })
-    .then(res => {
-      res.json();
-      console.log(res.ok);
-      return res.ok
-    })
+  .then(res => res.json())
+  .then(comment => comment.parentId)
+  .catch(error => error)
 
 export const changePost = (id, title, body) =>
   fetch(`${api}/posts/${id}`, {

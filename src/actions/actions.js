@@ -126,13 +126,11 @@ export function deletePost(postID){
 export function deleteCommentByID(commentID){
 	return dispatch => {
 		return deleteCommentById(commentID)
-			.then(
-				(response) => {
-					dispatch(
-						confirmDeletion(response)
-					)
-				}
-			)
+		.then(
+			response => {
+				dispatch(getCommentsFromPost(response))
+			}
+		)	
 	}
 }
 
