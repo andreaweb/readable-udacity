@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 const Post = (props) =>(
   props.post ?
   <section className="post">
-    <Link className="post__link" to={`/post-details/${props.post.id}`}>
+    <Link className="post__link" to={`/${props.post.category}/${props.post.id}`}>
       <h2 className="post__name">
         {props.post.title}
       </h2>
