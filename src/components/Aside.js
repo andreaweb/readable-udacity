@@ -34,8 +34,8 @@ class Aside extends React.Component{
 		              	className="order-by__select" 
 		              	onChange={(e) => this.props.sortBy(e.target.value)}
 		              	>
-		                <option value="date">Date</option>
-		                <option value="votes">Votes</option>
+		                <option value="date">Last Posts</option>
+		                <option value="votes">Best Voted</option>
 		              </select>
 		            </div>
 		            <ul className="categories">

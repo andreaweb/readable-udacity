@@ -27,10 +27,6 @@ class Home extends Component {
       this.props.dispatch(getAllPosts())
       this.filterCategories()
       this.sortPosts('date')
-      // console.log(
-      //   this.props.dispatch(getPost(this.id))
-      // )
-      // this.props.dispatch(getCommentsFromPost(this.id))
   }
   filterCategories = (category) => {
     if(category){
@@ -45,7 +41,7 @@ class Home extends Component {
     if(value === 'date'){
       this.setState({activeSort: (a,b) => b.timestamp - a.timestamp})
     }else{
-      this.setState({activeSort: (a,b) => a.timestamp - b.timestamp})
+      this.setState({activeSort: (a,b) => b.voteScore - a.voteScore})
     } 
     this.props.posts ?
     //without the filter it doesn't change
