@@ -44,12 +44,11 @@ class NewPost extends React.Component{
 					const postID = await this.props.dispatch(
 						editPost(
 							this.id,
-					        this.state.title, 
-					        this.state.details
+			        this.state.title, 
+			        this.state.details
 						)
 					)
 					if(postID){
-						alert("Post successfully edited! Woohoo!");
 						this.props.history.push(`/post-details/${postID}`);
 					}else{
 						alert("Your post has not been changed :( Try again later")
@@ -61,14 +60,12 @@ class NewPost extends React.Component{
 						createNewPost(this.stringifyPost())
 					)
 					if(newPostID){
-						alert("Post created! Yay!");
 						this.props.history.push(`/post-details/${newPostID}`);
 					}else{
 						alert("Oops, something went wrong :(")
 					}
 				})()
 			}
-		//replace alerts by something more visually aesthetic 
 		}else{
 			alert('You have not filled all necessary information!')
 		}
