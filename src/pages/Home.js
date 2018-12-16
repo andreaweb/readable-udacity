@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
-import * as API from '../API.js'
 import Aside from '../components/Aside';
 import Header from '../components/Header';
 import Post from '../components/Post';
-import logo from '../logo.svg';
-import { votePostByID, getAllPosts } from '../actions/actions.js';
+import { votePostByID, getAllPosts, deletePost } from '../actions/actions.js';
 import '../App.css';
 
 class Home extends Component {
@@ -23,10 +20,16 @@ class Home extends Component {
     const postVoted = this.props.posts.find(post => post.id === postID);
     return postVoted.voteScore--;
   }
+  deletePost = (postID) => {
+    this.props.dispatch(deletePost(postID));
+    const filters = [this.state.activeFilter, (post) => post.id !== postID]
+    const updateFilters = (v) => filters.every(f => f(v))
+    this.setState({activeFilter: updateFilters})
+  }
   componentDidMount(){
-      this.props.dispatch(getAllPosts())
-      this.filterCategories()
-      this.sortPosts('date')
+    this.props.dispatch(getAllPosts());
+    this.filterCategories(null);
+    this.sortPosts('date');
   }
   filterCategories = (category) => {
     if(category){
@@ -64,6 +67,7 @@ class Home extends Component {
                 reload={(category) => this.filterCategories(category)} 
                 upvote={(id) => this.upvote(id)}
                 downvote={(id) => this.downvote(id)}
+                deletePost={(id) => this.deletePost(id)}
               />
             )
           }  

@@ -43,6 +43,18 @@ const Post = (props) =>(
         <em><b> Commented:</b> {props.post.commentCount} times</em>
       </span>
     </div>
+    <section className="post-details__edit">
+      <Link 
+        to={`/edit-post/${props.post.id}`} 
+      >
+        <button className="button button--icon-only">
+          <i className="fa fa-pencil" />
+        </button>
+      </Link>
+      <button className="button button--icon-only" onClick={() => props.deletePost(props.post.id)}>
+        <i className="fa fa-trash" />
+      </button>
+    </section>
   </section>
   : null
 )

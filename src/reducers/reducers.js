@@ -3,6 +3,7 @@ import {
 		GET_POST,
 		GET_RESPONSE,
 		GET_CATEGORIES,
+		DELETE_POST,
 		GET_COMMENTS} 
 		from '../actions/actions.js';
 import {combineReducers} from 'redux';
@@ -13,7 +14,12 @@ function posts(state = [], action){
 			return {
 				...state, 
 				posts: action.posts
-			}		
+			}
+		case DELETE_POST:
+			return {
+				...state,
+				posts: action.posts
+			}
 		default:
 			return state
 	}

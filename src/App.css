@@ -77,8 +77,14 @@ fieldset{
   color: buttonface;
   background-color: buttontext
 }
-.button--delete{
-
+.button--icon-only{
+  padding: 0;
+  width: 40px;
+  height: 20px;
+  text-align: center;
+}
+.button--icon-only .fa{
+  margin-right: 0px;
 }
 .post:first-of-type{
   grid-column: 2/5;

@@ -27,56 +27,56 @@ class PostDetails extends React.Component{
 		})
 	}
 	componentDidMount(){
-		this.id = this.props.location.pathname.replace(/[/][a-z-]+[/]/, '')
-		this.props.dispatch(getPost(this.id))
-		this.props.dispatch(getCommentsFromPost(this.id))
-  	}
-  	deletePost = () => {
-  		this.props.dispatch(deletePost(this.id));
-  		this.props.history.push(`/`);
-  	}
-  	handleChange = (e) => {
-  		this.setState({[e.target.id]: e.target.value})
-  	}
-  	openModal = (commentID) => {
-  		if(typeof commentID === 'string'){
-  			let findComment = this.props.comments.find((comment) => comment.id === commentID) 
-  			this.setState({
-  				author: findComment.author,
-  				body: findComment.body,
-  				comment: commentID
-  			})
-  		}
-			this.setState({isModalOpen: true})
-  	}
-  	closeModal = () => {
-  		this.setState({isModalOpen: false})
-  		this.resetState();
-  	}
-  	upvote = (postID) => {
-  		this.props.dispatch(votePostByID(postID, 'upVote'))
-  	}
-  	downvote = (postID) => {
-  		this.props.dispatch(votePostByID(postID, 'downVote'))
-  	}
-  	editComment = (commentID) => {
-  		this.props.dispatch(editCommentByID(commentID, this.state.body))
-  		this.closeModal();
-  	}
-  	addComment = () => {
-  		let comment = {
-	  		body: this.state.body,
-	        id: Math.random().toString(36).substr(-8),
-	        timestamp: Date.now(),
-	        author: this.state.author,
-	        parentId: this.id 
-	    }
-  		if(this.props.dispatch(addNewComment(comment))){
-  			this.closeModal();
-  		}else{
-  			alert('your new comment didnt work')
-  		}
-  	}
+	this.id = this.props.location.pathname.replace(/[/][a-z-]+[/]/, '')
+	this.props.dispatch(getPost(this.id))
+	this.props.dispatch(getCommentsFromPost(this.id))
+	}
+	deletePost = () => {
+		this.props.dispatch(deletePost(this.id));
+		this.props.history.push(`/`);
+	}
+	handleChange = (e) => {
+		this.setState({[e.target.id]: e.target.value})
+	}
+	openModal = (commentID) => {
+		if(typeof commentID === 'string'){
+			let findComment = this.props.comments.find((comment) => comment.id === commentID) 
+			this.setState({
+				author: findComment.author,
+				body: findComment.body,
+				comment: commentID
+			})
+		}
+		this.setState({isModalOpen: true})
+	}
+	closeModal = () => {
+		this.setState({isModalOpen: false})
+		this.resetState();
+	}
+	upvote = (postID) => {
+		this.props.dispatch(votePostByID(postID, 'upVote'))
+	}
+	downvote = (postID) => {
+		this.props.dispatch(votePostByID(postID, 'downVote'))
+	}
+	editComment = (commentID) => {
+		this.props.dispatch(editCommentByID(commentID, this.state.body))
+		this.closeModal();
+	}
+	addComment = () => {
+		let comment = {
+  		body: this.state.body,
+        id: Math.random().toString(36).substr(-8),
+        timestamp: Date.now(),
+        author: this.state.author,
+        parentId: this.id 
+    }
+		if(this.props.dispatch(addNewComment(comment))){
+			this.closeModal();
+		}else{
+			alert('your new comment didnt work')
+		}
+	}
 	render(){
 		return(
 			<div className="App">
@@ -162,7 +162,7 @@ class PostDetails extends React.Component{
 					              "month":"short",
 					              "year":"numeric"
 					      	})},
-        				<em><b> Commented:</b> {props.post.commentCount} times</em>
+        				<em><b> Commented:</b> {this.props.post.commentCount} times</em>
 	            </span>
 						</div>
 					</section>

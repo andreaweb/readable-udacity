@@ -33,20 +33,11 @@ function receivePosts(posts){
 function receivePost(post){
 	return { type: GET_POST, post}
 }
-function confirmDeletion(response){
-	return { type: DELETE_POST, response}
-}
-function receiveResponse(response){
-	return { type: GET_RESPONSE, response}
-}
 function receiveCategories(categories){
 	return { type: GET_CATEGORIES, categories}
 }
 function receiveComments(comments){
 	return { type: GET_COMMENTS, comments}
-}
-function receiveComment(comment){
-	return { type: GET_COMMENT, comment}
 }
 
 export function addNewComment(comment){
@@ -112,9 +103,7 @@ export function deletePost(postID){
 		return deletePostById(postID)
 			.then(
 				(response) => {
-					dispatch(
-						confirmDeletion(response)
-					)
+					dispatch( getAllPosts())
 				}
 			)
 	}

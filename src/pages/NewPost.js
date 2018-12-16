@@ -121,15 +121,14 @@ class NewPost extends React.Component{
 							<span className="new-post__category__title">Category:</span>
 							{ this.props.categories 
 								? this.props.categories.map(
-									(cat, key) => 
-									<fieldset>
+									(cat) => 
+									<fieldset key={cat.name}>
 										<input 
 											className="new-post__category__radio"
 											disabled={this.id ? true : false }
 											type="radio" 
 											id="category"
 											checked={cat.name === this.state.category}
-											key={key}
 											name="category" 
 											value={cat.name}
 											onChange={this.handleChange}

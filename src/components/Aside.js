@@ -1,5 +1,5 @@
 import React from 'react'
-import { getAllCategories, getPost } from '../actions/actions.js';
+import { getAllCategories } from '../actions/actions.js';
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
 

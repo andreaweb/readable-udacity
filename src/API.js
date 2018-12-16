@@ -17,8 +17,8 @@ export const getCategories = () =>
 
 export const getComments = (id) =>
   fetch(`${api}/posts/${id}/comments`, { headers })
-    .then(res => {console.log(res); return res.json()})
-    .then(comments => {console.log(comments); return comments})
+    .then(res => res.json())
+    .then(comments => comments)
 
 export const getPosts = () =>
   fetch(`${api}/posts`, { headers })
@@ -43,11 +43,7 @@ export const deletePostById = (id) =>
       method: 'DELETE',
       headers: headers
     })
-    .then(res => {
-      res.json();
-      console.log(res.ok);
-      return res.ok
-    })
+    .then(res =>  res.ok)
 
 export const deleteCommentById = (id) =>
   fetch(`${api}/comments/${id}`, {
@@ -88,7 +84,7 @@ export const votePost = (postID, option) =>
     }
   )
   .then(res => res.json())
-  .then(post => {console.log(post); return post})
+  .then(post => post)
 
 export const voteComment = (commentID, option) =>
   fetch(`${api}/comments/${commentID}`, { 
