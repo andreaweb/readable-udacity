@@ -86,6 +86,7 @@ class PostDetails extends React.Component{
 						<div className="new-post__text">
 							<label>Your Name or Nickname:</label>
 							<input 
+								disabled={this.state.comment ? true : false}
 								id="author"
 								className="new-post__input"
 								value={this.state.author} 
