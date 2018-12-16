@@ -6,7 +6,7 @@ import Aside from '../components/Aside';
 import Header from '../components/Header';
 import Post from '../components/Post';
 import logo from '../logo.svg';
-import { votePostByID,getAllPosts } from '../actions/actions.js';
+import { votePostByID, getAllPosts } from '../actions/actions.js';
 import '../App.css';
 
 class Home extends Component {
@@ -14,10 +14,14 @@ class Home extends Component {
     activeFilter: () => true
   }
   upvote = (postID) => {
-    this.props.dispatch(votePostByID(postID, 'upVote'))
+    this.props.dispatch(votePostByID(postID, 'upVote'));
+    const postVoted = this.props.posts.find(post => post.id === postID);
+    return postVoted.voteScore++;
   }
   downvote = (postID) => {
-    this.props.dispatch(votePostByID(postID, 'downVote'))
+    this.props.dispatch(votePostByID(postID, 'downVote'));
+    const postVoted = this.props.posts.find(post => post.id === postID);
+    return postVoted.voteScore--;
   }
   componentDidMount(){
       this.props.dispatch(getAllPosts())
@@ -81,7 +85,9 @@ class Home extends Component {
 }
 
 function mapStateToProps(state){
-  return state.posts
+  const { post } = state.post
+  const { posts } = state.posts
+  return { post, posts }
 }
 
 export default connect(mapStateToProps)(Home)

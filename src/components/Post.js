@@ -21,7 +21,9 @@ const Post = (props) =>(
       <p className="votes">
         {props.post.voteScore}
       </p>
-      <i className="fa fa-caret-down" onClick={() => props.downvote(props.post.id)}/>
+      <i className="fa fa-caret-down" onClick={
+        () => props.downvote(props.post.id)}
+        />
     </div>
     <div className="post__summary">
       <p className="post__body">

@@ -155,10 +155,9 @@ export function votePostByID(postID, option){
 	return dispatch => {
 		return votePost(postID, option)
 			.then(
-				(response) => { 
+				(post) => { 
 					dispatch(
-						//receivePost(post)
-						receiveResponse(response)
+						receivePost(post)
 					)
 				}
 			)

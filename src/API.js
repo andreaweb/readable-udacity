@@ -88,7 +88,7 @@ export const votePost = (postID, option) =>
     }
   )
   .then(res => res.json())
-  .then(post => post)
+  .then(post => {console.log(post); return post})
 
 export const voteComment = (commentID, option) =>
   fetch(`${api}/comments/${commentID}`, { 
