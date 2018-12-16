@@ -37,26 +37,19 @@ class Home extends Component {
     }
   }
   sortPosts = (value) => {
-    console.log(value)
     if(value === 'date'){
       this.setState({activeSort: (a,b) => b.timestamp - a.timestamp})
     }else{
       this.setState({activeSort: (a,b) => b.voteScore - a.voteScore})
     } 
-    this.props.posts ?
-    //without the filter it doesn't change
-    //the filter can be in any order
-    console.log(
+    this.props.posts &&
       this.props.posts.sort(this.state.activeSort)
-      .filter(this.state.activeFilter)
       .map((post) => post.category)
-    )
-    : console.log('waiting')
   }
   render() {
     return (
       <div className="App">
-        <Header reload={() => this.filterCategories()} />
+        <Header removeFilters={() => this.filterCategories(null)} />
         <main className="container container--main">
           <Aside page="home" sortBy={(value) => this.sortPosts(value)} />
           { this.props.posts 

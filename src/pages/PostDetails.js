@@ -102,17 +102,19 @@ class PostDetails extends React.Component{
 								className="new-post__textarea" 
 							/>
 						</div>
-						<button 
-							className="button" 
-							onClick={this.state.comment 
-								? () => this.editComment(this.state.comment)
-								: this.addComment }
-						>
-							{this.state.comment ? 'Edit' : 'Comment'}
-						</button>
-						<button className="button" onClick={this.closeModal}>
-							Cancel
-						</button>
+						<div className="new-post__buttons">
+							<button 
+								className="button" 
+								onClick={this.state.comment 
+									? () => this.editComment(this.state.comment)
+									: this.addComment }
+							>
+								{this.state.comment ? 'Edit' : 'Comment'}
+							</button>
+							<button className="button" onClick={this.closeModal}>
+								Cancel
+							</button>
+						</div>
 					</section>
 				</div>
 				<Header />
