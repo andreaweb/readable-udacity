@@ -161,7 +161,8 @@ class PostDetails extends React.Component{
 					              "minute":"numeric",
 					              "month":"short",
 					              "year":"numeric"
-					      	})}
+					      	})},
+        				<em><b> Commented:</b> {props.post.commentCount} times</em>
 	            </span>
 						</div>
 					</section>
