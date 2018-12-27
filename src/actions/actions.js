@@ -1,29 +1,17 @@
 import { 
 	getCategories, 
-	getComments, 
 	getPosts, 
 	getSpecificPost, 
 	createPost,
-	createComment,
 	changePost,
-	editComment,
-	voteComment,
 	votePost,
-	deletePostById,
-	deleteCommentById
+	deletePostById
 } 
 from '../API.js';
 
-export const ADD_POST = 'ADD_POST';
-export const ADD_COMMENT = 'ADD_COMMENT';
 export const DELETE_POST = 'DELETE_POST';
-export const DELETE_COMMENT = 'DELETE_COMMENT';
-export const GET_RESPONSE = 'GET_RESPONSE';
-export const EDIT_COMMENT = 'EDIT_COMMENT';
+export const GET_RESPONSE = 'GET_RESPONSE'; /*CHECK IF REDUCER DOES ANYTHING*/
 export const GET_CATEGORIES = 'GET_CATEGORIES';
-export const GET_COMMENTS = 'GET_COMMENTS';
-export const GET_COMMENT = 'GET_COMMENT';
-export const GET_NEW_POST = 'GET_NEW_POST';
 export const GET_POSTS = 'GET_POSTS';
 export const GET_POST = 'GET_POST';
 
@@ -36,20 +24,9 @@ function receivePost(post){
 function receiveCategories(categories){
 	return { type: GET_CATEGORIES, categories}
 }
-function receiveComments(comments){
-	return { type: GET_COMMENTS, comments}
-}
 
-export function addNewComment(comment){
-	return dispatch => {
-		return createComment(comment)
-			.then(
-				response => {
-					dispatch(getCommentsFromPost(response))
-				}
-			)
-	}
-}
+
+
 
 export function createNewPost(post){
 	return dispatch => {
@@ -59,18 +36,7 @@ export function createNewPost(post){
 			)
 	}
 }
-export function getCommentsFromPost(postID){
-	return dispatch => {
-		return getComments(postID)
-			.then(
-				comments => { 
-					dispatch(
-						receiveComments(comments)
-					)
-				}
-			)
-	}
-}
+
 
 export function getAllPosts(){
 	return dispatch => {
@@ -109,16 +75,6 @@ export function deletePost(postID){
 	}
 }
 
-export function deleteCommentByID(commentID){
-	return dispatch => {
-		return deleteCommentById(commentID)
-		.then(
-			response => {
-				dispatch(getCommentsFromPost(response))
-			}
-		)	
-	}
-}
 
 export function editPost(postID, postTitle, postBody){
 	return dispatch => {
@@ -129,16 +85,7 @@ export function editPost(postID, postTitle, postBody){
 	}	
 }
 
-export function voteCommentByID(commentID, option){
-	return dispatch => {
-		return voteComment(commentID, option)
-		.then(
-			response => {
-				dispatch(getCommentsFromPost(response))
-			}
-		)	
-	}	
-}
+
 
 export function votePostByID(postID, option){
 	return dispatch => {
@@ -151,17 +98,6 @@ export function votePostByID(postID, option){
 				}
 			)
 	}	
-}
-
-export function editCommentByID(commentID, commentBody){
-	return dispatch => {
-		return editComment(commentID, commentBody)
-			.then(
-				response => {
-					dispatch(getCommentsFromPost(response))
-				}
-			)
-	}
 }
 
 export function getAllCategories(){

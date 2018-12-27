@@ -3,9 +3,9 @@ import {
 		GET_POST,
 		GET_RESPONSE,
 		GET_CATEGORIES,
-		DELETE_POST,
-		GET_COMMENTS} 
+		DELETE_POST} 
 		from '../actions/actions.js';
+import {GET_COMMENTS} from '../actions/comments.js';
 import {combineReducers} from 'redux';
 
 function posts(state = [], action){

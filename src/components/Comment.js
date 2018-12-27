@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { deleteCommentByID, voteCommentByID } from '../actions/actions.js';
+import { deleteCommentByID, voteCommentByID } from '../actions/comments.js';
 
 class Comment extends React.Component{
 	deleteComment = (commentID) => {
