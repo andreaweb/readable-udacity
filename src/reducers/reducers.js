@@ -36,18 +36,6 @@ function post(state = [], action){
 	}
 }
 
-function response(state = [], action){
-	switch(action.type){
-		case GET_RESPONSE:
-			return {
-				...state,
-				response: action.response
-			}
-		default:
-			return state
-	}
-}
-
 function comments(state = [], action){
 	switch(action.type){
 		case GET_COMMENTS:
@@ -73,6 +61,6 @@ function categories(state = [], action){
 	}
 }
 
-const rootReducer = combineReducers({posts, post, response, comments, categories})
+const rootReducer = combineReducers({posts, post, comments, categories})
 
 export default rootReducer

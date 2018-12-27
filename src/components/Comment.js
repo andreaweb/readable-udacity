@@ -22,21 +22,21 @@ class Comment extends React.Component{
 					<p className="comment-details">
 						<em><b>By: </b></em>
 						<span className="comment-detail">
-				       		{this.props.comment.author}, 
-				       	</span> 
-					    <span className="comment-detail">
-					    	<em><b> Posted At: </b></em>
-					    </span>
-					    <span className="comment-detail">
-              				{new Date(this.props.comment.timestamp).toLocaleString("en-US", {
-				              "day": "numeric",
-				              "hour":"numeric",
-				              "minute":"numeric",
-				              "month":"short",
-				              "year":"numeric"
-				      		})}
-			      		</span>
-            			</p>
+				      {this.props.comment.author}, 
+				    </span> 
+					  <span className="comment-detail">
+					    <em><b> Posted At: </b></em>
+					  </span>
+					  <span className="comment-detail">
+          		{new Date(this.props.comment.timestamp).toLocaleString("en-US", {
+	              "day": "numeric",
+	              "hour":"numeric",
+	              "minute":"numeric",
+	              "month":"short",
+	              "year":"numeric"
+		      		})}
+			      </span>
+          </p>
 				</div>
 				<section className="comment-buttons">
 					<button 

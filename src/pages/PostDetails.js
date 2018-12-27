@@ -157,7 +157,10 @@ class PostDetails extends React.Component{
 					              "month":"short",
 					              "year":"numeric"
 					      	})},
-        				<em><b> Commented:</b> {this.props.post.commentCount} times</em>
+        				<em>
+	        				<b> Commented:</b> 
+	        				{this.props.comments ? this.props.comments.length : 0} times
+        				</em>
 	            </span>
 						</div>
 					</section>

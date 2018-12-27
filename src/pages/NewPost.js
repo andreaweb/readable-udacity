@@ -161,8 +161,7 @@ class NewPost extends React.Component{
 function mapStateToProps(state){
 	const { categories } = state.categories
 	const { post } = state.post
-	const { response } = state.response
-	return { categories, post, response }
+	return { categories, post }
 }
 
 export default connect(mapStateToProps)(NewPost)

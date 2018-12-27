@@ -12,8 +12,8 @@ ReactDOM.render(
 	<Provider store={store}>
 		<BrowserRouter>
 			<Switch>
-				<Route component={Home} exact path="/:category?" />
 				<Route component={NewPost} path="/(new-post|edit-post)/:id?/" />
+				<Route component={Home} exact path="/:category?" />
 				<Route component={PostDetails} path="/:category/:id?" />
 			</Switch>
 		</BrowserRouter>
