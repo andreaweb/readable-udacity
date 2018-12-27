@@ -4,7 +4,7 @@ import Header from '../components/Header';
 import Aside from '../components/Aside';
 import Comment from '../components/Comment';
 import { connect } from 'react-redux';
-import { deletePost, votePostByID, getPost } from '../actions/actions.js';
+import { deletePost, votePostByID, getPost } from '../actions/posts.js';
 import { addNewComment,getCommentsFromPost,editCommentByID } from '../actions/comments.js';
 
 class PostDetails extends React.Component{

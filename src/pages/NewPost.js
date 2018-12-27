@@ -2,7 +2,8 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
-import { getPost, editPost, createNewPost, getAllCategories } from '../actions/actions.js';
+import { getPost, editPost, createNewPost } from '../actions/posts.js';
+import { getAllCategories } from '../actions/actions.js';
 
 class NewPost extends React.Component{
 	state = {

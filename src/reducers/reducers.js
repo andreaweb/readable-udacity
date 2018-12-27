@@ -1,10 +1,9 @@
 import {
 		GET_POSTS,
 		GET_POST,
-		GET_RESPONSE,
-		GET_CATEGORIES,
 		DELETE_POST} 
-		from '../actions/actions.js';
+		from '../actions/posts.js';
+import {GET_RESPONSE,GET_CATEGORIES} from '../actions/actions.js';
 import {GET_COMMENTS} from '../actions/comments.js';
 import {combineReducers} from 'redux';
 

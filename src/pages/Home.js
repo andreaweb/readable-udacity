@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Aside from '../components/Aside';
 import Header from '../components/Header';
 import Post from '../components/Post';
-import { votePostByID, getAllPosts, deletePost } from '../actions/actions.js';
+import { votePostByID, getAllPosts, deletePost } from '../actions/posts.js';
 import '../App.css';
 
 class Home extends Component {

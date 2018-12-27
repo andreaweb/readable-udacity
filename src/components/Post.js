@@ -9,7 +9,7 @@ const Post = (props) =>(
         {props.post.title}
       </h2>
     </Link>
-    <Link className="post__category" to={`/post-categories/${props.post.category}`} 
+    <Link className="post__category" to={`/${props.post.category}`} 
       onClick={() => props.reload(props.post.category)}
     >
       <h4>
