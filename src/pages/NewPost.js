@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
+import {bindActionCreators} from 'redux';
 import { getPost, editPost, createNewPost } from '../actions/posts.js';
 import { getAllCategories } from '../actions/actions.js';
 
@@ -15,13 +16,11 @@ class NewPost extends React.Component{
 	componentDidMount(){
 		this.id = this.props.match.params.id;
 		if(this.id){
-			this.props.dispatch(
-				getPost(this.id)
-			).then(() => {
+			this.props.getPost(this.id).then(() => {
 				this.setCurrentValues()
 			})
 		}
-		this.props.dispatch(getAllCategories())
+		this.props.getAllCategories()
 	}
 	setCurrentValues = () => {
 		this.setState({
@@ -42,12 +41,10 @@ class NewPost extends React.Component{
 		){
 			if(this.id){	
 				(async () => { 
-					const postID = await this.props.dispatch(
-						editPost(
+					const postID = await this.props.editPost(
 							this.id,
 			        this.state.title, 
 			        this.state.details
-						)
 					)
 					if(postID){
 						this.props.history.push(`/post-details/${postID}`);
@@ -57,9 +54,7 @@ class NewPost extends React.Component{
 				})()
 			}else{
 				(async () => { 
-					const newPostID = await this.props.dispatch(
-						createNewPost(this.stringifyPost())
-					)
+					const newPostID = await this.props.createNewPost(this.stringifyPost())
 					if(newPostID){
 						this.props.history.push(`/post-details/${newPostID}`);
 					}else{
@@ -164,4 +159,15 @@ function mapStateToProps(state){
 	return { categories, post }
 }
 
-export default connect(mapStateToProps)(NewPost)
+const mapDispatchToProps = dispatch => {
+	 return{
+	 	...bindActionCreators(
+	 		{ 
+	 			createNewPost, editPost, getAllCategories, getPost
+	 		}
+	 		, dispatch
+	 	)
+	 }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(NewPost)

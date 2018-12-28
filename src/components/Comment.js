@@ -1,16 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import {bindActionCreators} from 'redux';
 import { deleteCommentByID, voteCommentByID } from '../actions/comments.js';
 
 class Comment extends React.Component{
 	deleteComment = (commentID) => {
-		this.props.dispatch(deleteCommentByID(commentID))
+		this.props.deleteCommentByID(commentID)
 	}
 	upvote = (commentID) => {
-		this.props.dispatch(voteCommentByID(commentID, 'upVote'))
+		this.props.voteCommentByID(commentID, 'upVote')
 	}
 	downvote = (commentID) => {
-		this.props.dispatch(voteCommentByID(commentID, 'downVote'))
+		this.props.voteCommentByID(commentID, 'downVote')
 	}
 	render(){
 		return (
@@ -70,4 +71,19 @@ class Comment extends React.Component{
 	}
 }
 
-export default connect()(Comment)
+const mapStateToProps = () => {
+	
+}
+
+const mapDispatchToProps = dispatch => {
+	 return{
+	 	...bindActionCreators(
+	 		{ 
+	 			deleteCommentByID, voteCommentByID 
+	 		}
+	 		, dispatch
+	 	)
+	 }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Comment)
