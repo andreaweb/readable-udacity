@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import Aside from '../components/Aside';
 import Comment from '../components/Comment';
 import { connect } from 'react-redux';
+import {bindActionCreators} from 'redux';
 import { deletePost, votePostByID, getPost } from '../actions/posts.js';
 import { addNewComment,getCommentsFromPost,editCommentByID } from '../actions/comments.js';
 
@@ -22,12 +23,12 @@ class PostDetails extends React.Component{
 		})
 	}
 	componentDidMount(){
-	this.id = this.props.location.pathname.replace(/[/][a-z-]+[/]/, '')
-	this.props.dispatch(getPost(this.id))
-	this.props.dispatch(getCommentsFromPost(this.id))
+		this.id = this.props.location.pathname.replace(/[/][a-z-]+[/]/, '')
+		this.props.getPost(this.id)
+		this.props.getCommentsFromPost(this.id)
 	}
 	deletePost = () => {
-		this.props.dispatch(deletePost(this.id));
+		this.props.deletePost(this.id);
 		this.props.history.push(`/`);
 	}
 	handleChange = (e) => {
@@ -49,13 +50,13 @@ class PostDetails extends React.Component{
 		this.resetState();
 	}
 	upvote = (postID) => {
-		this.props.dispatch(votePostByID(postID, 'upVote'))
-	}
+		this.props.votePostByID(postID, 'upVote')
+	 }
 	downvote = (postID) => {
-		this.props.dispatch(votePostByID(postID, 'downVote'))
+		this.props.votePostByID(postID, 'downVote')
 	}
 	editComment = (commentID) => {
-		this.props.dispatch(editCommentByID(commentID, this.state.body))
+		this.props.editCommentByID(commentID, this.state.body)
 		this.closeModal();
 	}
 	addComment = () => {
@@ -66,7 +67,7 @@ class PostDetails extends React.Component{
         author: this.state.author,
         parentId: this.id 
     }
-		if(this.props.dispatch(addNewComment(comment))){
+		if(this.props.addNewComment(comment)){
 			this.closeModal();
 		}else{
 			alert('your new comment didnt work')
@@ -191,4 +192,16 @@ function mapStateToProps(state){
 	return { post, comments }
 }
 
-export default connect(mapStateToProps)(PostDetails)
+const mapDispatchToProps = dispatch => {
+	 return{
+	 	...bindActionCreators(
+	 		{ 
+	 			votePostByID, getPost, deletePost,
+	 			getCommentsFromPost, editCommentByID, addNewComment 
+	 		}
+	 		, dispatch
+	 	)
+	 }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostDetails)
