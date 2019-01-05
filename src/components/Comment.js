@@ -71,10 +71,6 @@ class Comment extends React.Component{
 	}
 }
 
-const mapStateToProps = () => {
-	
-}
-
 const mapDispatchToProps = dispatch => {
 	 return{
 	 	...bindActionCreators(
@@ -86,4 +82,4 @@ const mapDispatchToProps = dispatch => {
 	 }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Comment)
+export default connect(null, mapDispatchToProps)(Comment)

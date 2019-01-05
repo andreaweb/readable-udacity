@@ -1,5 +1,4 @@
 import { 
-	getCategories, 
 	getPosts, 
 	getSpecificPost, 
 	createPost,
@@ -12,12 +11,16 @@ from '../API.js';
 export const DELETE_POST = 'DELETE_POST';
 export const GET_POSTS = 'GET_POSTS';
 export const GET_POST = 'GET_POST';
+export const UPDATE_POST = 'UPDATE_POST';
 
 function receivePosts(posts){
 	return { type: GET_POSTS, posts}
 }
 function receivePost(post){
 	return { type: GET_POST, post}
+}
+function updatePost(post){
+	return {type: UPDATE_POST, post}
 }
 
 export function createNewPost(post){
@@ -85,6 +88,20 @@ export function votePostByID(postID, option){
 				(post) => { 
 					dispatch(
 						receivePost(post)
+					)
+				}
+			)
+	}	
+}
+
+export function votePostInArr(postID, option){
+	return dispatch => {
+		return votePost(postID, option)
+			.then(
+				(post) => { 
+					console.log(post.voteScore);
+					dispatch(
+						updatePost(post)
 					)
 				}
 			)

@@ -1,9 +1,10 @@
 import {
 		GET_POSTS,
 		GET_POST,
+		UPDATE_POST,
 		DELETE_POST} 
 		from '../actions/posts.js';
-import {GET_RESPONSE,GET_CATEGORIES} from '../actions/actions.js';
+import {GET_CATEGORIES} from '../actions/actions.js';
 import {GET_COMMENTS} from '../actions/comments.js';
 import {combineReducers} from 'redux';
 
@@ -19,6 +20,11 @@ function posts(state = [], action){
 				...state,
 				posts: action.posts
 			}
+		case UPDATE_POST:
+			return {
+				...state,
+				posts: [...state.posts.filter(post => post.id !== action.post.id), action.post]
+			}
 		default:
 			return state
 	}
@@ -30,7 +36,7 @@ function post(state = [], action){
 			return {
 				...state, 
 				post: action.post
-			}	
+			 }
 		default:
 			return state
 	}

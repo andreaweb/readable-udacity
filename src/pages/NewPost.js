@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
-import {bindActionCreators} from 'redux';
+import { bindActionCreators } from 'redux';
 import { getPost, editPost, createNewPost } from '../actions/posts.js';
 import { getAllCategories } from '../actions/actions.js';
 

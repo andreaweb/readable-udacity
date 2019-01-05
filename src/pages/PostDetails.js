@@ -24,6 +24,7 @@ class PostDetails extends React.Component{
 	}
 	componentDidMount(){
 		this.id = this.props.location.pathname.replace(/[/][a-z-]+[/]/, '')
+		console.log(this.props.getPost(this.id))
 		this.props.getPost(this.id)
 		this.props.getCommentsFromPost(this.id)
 	}

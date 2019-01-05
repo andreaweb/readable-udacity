@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Aside from '../components/Aside';
 import Header from '../components/Header';
 import Post from '../components/Post';
-import { votePostByID, getAllPosts, deletePost } from '../actions/posts.js';
+import { votePostInArr, getAllPosts, deletePost } from '../actions/posts.js';
 import '../App.css';
 
 class Home extends Component {
@@ -11,14 +11,21 @@ class Home extends Component {
     activeFilter: () => true
   }
   upvote = (postID) => {
-    this.props.dispatch(votePostByID(postID, 'upVote'));
+    this.props.dispatch(votePostInArr(postID, 'upVote'));
     const postVoted = this.props.posts.find(post => post.id === postID);
-    return postVoted.voteScore++;
+    const index = this.props.posts.indexOf(postVoted);
+    this.props.post ? 
+      this.props.posts[index] = this.props.post
+      : null
   }
   downvote = (postID) => {
-    this.props.dispatch(votePostByID(postID, 'downVote'));
-    const postVoted = this.props.posts.find(post => post.id === postID);
-    return postVoted.voteScore--;
+    (async() =>{
+      console.log('calling');
+      console.log(postID);
+      const updatedPost = await this.props.dispatch(votePostInArr(postID, 'downVote'));
+      console.log(updatedPost);
+     
+    })(postID)
   }
   deletePost = (postID) => {
     this.props.dispatch(deletePost(postID));

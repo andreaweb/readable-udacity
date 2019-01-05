@@ -27,10 +27,7 @@ export const getPosts = () =>
 
 export const getSpecificPost = (id) =>
   fetch(`${api}/posts/${id}`, { headers })
-    .then(res => {
-      console.log(id)
-      return res.json();
-    })
+    .then(res => res.json())
     .then(post => post)
 
 export const getPostsInCategory = (category) =>
