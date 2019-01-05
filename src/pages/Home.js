@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Aside from '../components/Aside';
 import Header from '../components/Header';
 import Post from '../components/Post';
+import {bindActionCreators} from 'redux';
 import { votePostInArr, getAllPosts, deletePost } from '../actions/posts.js';
 import '../App.css';
 
@@ -11,30 +12,19 @@ class Home extends Component {
     activeFilter: () => true
   }
   upvote = (postID) => {
-    this.props.dispatch(votePostInArr(postID, 'upVote'));
-    const postVoted = this.props.posts.find(post => post.id === postID);
-    const index = this.props.posts.indexOf(postVoted);
-    this.props.post ? 
-      this.props.posts[index] = this.props.post
-      : null
+    this.props.votePostInArr(postID, 'upVote');
   }
   downvote = (postID) => {
-    (async() =>{
-      console.log('calling');
-      console.log(postID);
-      const updatedPost = await this.props.dispatch(votePostInArr(postID, 'downVote'));
-      console.log(updatedPost);
-     
-    })(postID)
+    this.props.votePostInArr(postID, 'downVote');
   }
   deletePost = (postID) => {
-    this.props.dispatch(deletePost(postID));
+    this.props.deletePost(postID);
     const filters = [this.state.activeFilter, (post) => post.id !== postID]
     const updateFilters = (v) => filters.every(f => f(v))
     this.setState({activeFilter: updateFilters})
   }
   componentDidMount(){
-    this.props.dispatch(getAllPosts());
+    this.props.getAllPosts();
     this.filterCategories(null);
     this.sortPosts('date');
   }
@@ -90,4 +80,15 @@ function mapStateToProps(state){
   return { post, posts }
 }
 
-export default connect(mapStateToProps)(Home)
+const mapDispatchToProps = dispatch => {
+   return{
+    ...bindActionCreators(
+      { 
+        votePostInArr, getAllPosts, deletePost
+      }
+      , dispatch
+    )
+   }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
