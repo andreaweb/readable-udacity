@@ -24,8 +24,7 @@ class PostDetails extends React.Component{
 	}
 	componentDidMount(){
 		this.id = this.props.location.pathname.replace(/[/][a-z-]+[/]/, '')
-		console.log(this.props.getPost(this.id))
-		this.props.getPost(this.id)
+		this.props.getPost(this.id);
 		this.props.getCommentsFromPost(this.id)
 	}
 	deletePost = () => {
@@ -115,6 +114,7 @@ class PostDetails extends React.Component{
 					</section>
 				</div>
 				<Header />
+				{this.props.redirect && this.props.history.push('/not-found')}
 				{this.props.post &&
 				<main className="container container--main">
 					<Aside page="post-details" />
@@ -190,7 +190,8 @@ class PostDetails extends React.Component{
 function mapStateToProps(state){
 	const { post } = state.post
 	const { comments } = state.comments
-	return { post, comments }
+	const { redirect } = state.redirect
+	return { post, comments, redirect }
 }
 
 const mapDispatchToProps = dispatch => {

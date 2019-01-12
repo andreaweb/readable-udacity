@@ -1,6 +1,7 @@
 import {
 		GET_POSTS,
 		GET_POST,
+		REDIRECT,
 		UPDATE_POST,
 		DELETE_POST} 
 		from '../actions/posts.js';
@@ -24,6 +25,18 @@ function posts(state = [], action){
 			return {
 				...state,
 				posts: [...state.posts.filter(post => post.id !== action.post.id), action.post]
+			}
+		default:
+			return state
+	}
+}
+
+function redirect(state = [], action){
+	switch(action.type){
+		case REDIRECT:
+			return {
+				...state,
+				redirect: true
 			}
 		default:
 			return state
@@ -67,6 +80,6 @@ function categories(state = [], action){
 	}
 }
 
-const rootReducer = combineReducers({posts, post, comments, categories})
+const rootReducer = combineReducers({posts, post, redirect, comments, categories})
 
 export default rootReducer

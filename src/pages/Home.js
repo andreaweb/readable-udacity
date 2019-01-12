@@ -51,7 +51,10 @@ class Home extends Component {
       <div className="App">
         <Header removeFilters={() => this.filterCategories(null)} />
         <main className="container container--main">
-          <Aside page="home" sortBy={(value) => this.sortPosts(value)} />
+          <Aside 
+            page="home" 
+            sortBy={(value) => this.sortPosts(value)} 
+          />
           { this.props.posts 
             && this.props.posts
             .filter(this.state.activeFilter)

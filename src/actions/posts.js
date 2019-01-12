@@ -12,6 +12,7 @@ export const DELETE_POST = 'DELETE_POST';
 export const GET_POSTS = 'GET_POSTS';
 export const GET_POST = 'GET_POST';
 export const UPDATE_POST = 'UPDATE_POST';
+export const REDIRECT = 'REDIRECT';
 
 function receivePosts(posts){
 	return { type: GET_POSTS, posts}
@@ -21,6 +22,9 @@ function receivePost(post){
 }
 function updatePost(post){
 	return {type: UPDATE_POST, post}
+}
+function redirectNotFound(){
+	return {type: REDIRECT}
 }
 
 export function createNewPost(post){
@@ -50,9 +54,15 @@ export function getPost(postID){
 		return getSpecificPost(postID)
 			.then(
 				post => { 
-					dispatch(
-						receivePost(post)
-					)
+					if(post.title){
+						dispatch(
+							receivePost(post)
+						)
+					}else{
+						dispatch(
+							redirectNotFound()
+						)
+					}	
 				}
 			)
 	}	
