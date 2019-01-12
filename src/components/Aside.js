@@ -43,9 +43,13 @@ class Aside extends React.Component{
 	            { this.props.categories 
 	            	&& this.props.categories.map(
 	            			(cat, key) =>
-	            			<li key={key}>
-	            				{cat.name}
-	            			</li>
+	            			<Link key={key} to={`/${cat.name}`} className="remove-styles-link">
+											<li 
+		            				onClick={() => this.props.reload(cat.name)}
+		            			>
+		            				{cat.name}
+		            			</li>
+										</Link>
 	            		)
 	            }
 	          </ul>

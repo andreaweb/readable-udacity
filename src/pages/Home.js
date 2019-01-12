@@ -53,6 +53,7 @@ class Home extends Component {
         <main className="container container--main">
           <Aside 
             page="home" 
+            reload={(category) => this.filterCategories(category)}
             sortBy={(value) => this.sortPosts(value)} 
           />
           { this.props.posts 
